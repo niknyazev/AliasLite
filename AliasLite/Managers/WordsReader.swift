@@ -9,13 +9,18 @@ import Foundation
 
 class WordsReader {
     
-    static func getWords() throws -> [Word] {
+    static func getWords() -> [Word] {
         
         guard let path = Bundle.main.path(forResource: "Words", ofType: "json") else {
             return []
         }
         
-        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        
+        guard let data = data else {
+            return []
+        }
+        
         let words = JSONWorker.shared.decodeJSON(type: [Word].self, from: data)
         
         if let result = words {
