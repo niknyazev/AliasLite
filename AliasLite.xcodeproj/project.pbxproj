@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0137794228A135F500325362 /* Words.json in Resources */ = {isa = PBXBuildFile; fileRef = 0137794128A135F500325362 /* Words.json */; };
+		0137794528A137E800325362 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794428A137E800325362 /* JSONWorker.swift */; };
+		0137794828A13AB700325362 /* WordsViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794728A13AB700325362 /* WordsViewerViewController.swift */; };
+		0137794B28A1506F00325362 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794A28A1506F00325362 /* Word.swift */; };
+		0137794D28A2569A00325362 /* WordsReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794C28A2569A00325362 /* WordsReader.swift */; };
 		01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C6289C427100DE2BED /* AppDelegate.swift */; };
 		01C8C7C9289C427100DE2BED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C8289C427100DE2BED /* SceneDelegate.swift */; };
 		01C8C7CB289C427100DE2BED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CA289C427100DE2BED /* ViewController.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0137794128A135F500325362 /* Words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Words.json; sourceTree = "<group>"; };
+		0137794428A137E800325362 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
+		0137794728A13AB700325362 /* WordsViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewerViewController.swift; sourceTree = "<group>"; };
+		0137794A28A1506F00325362 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		0137794C28A2569A00325362 /* WordsReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReader.swift; sourceTree = "<group>"; };
 		01C8C7C3289C427100DE2BED /* AliasLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AliasLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C8C7C6289C427100DE2BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C8C7C8289C427100DE2BED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +49,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0137794028A135B300325362 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0137794128A135F500325362 /* Words.json */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		0137794328A136EA00325362 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0137794428A137E800325362 /* JSONWorker.swift */,
+				0137794C28A2569A00325362 /* WordsReader.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0137794628A13A6D00325362 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0137794728A13AB700325362 /* WordsViewerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0137794928A1505D00325362 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0137794A28A1506F00325362 /* Word.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		01C8C7BA289C427100DE2BED = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +101,10 @@
 		01C8C7C5289C427100DE2BED /* AliasLite */ = {
 			isa = PBXGroup;
 			children = (
+				0137794028A135B300325362 /* Data */,
+				0137794928A1505D00325362 /* Model */,
+				0137794628A13A6D00325362 /* Controllers */,
+				0137794328A136EA00325362 /* Managers */,
 				01C8C7C6289C427100DE2BED /* AppDelegate.swift */,
 				01C8C7C8289C427100DE2BED /* SceneDelegate.swift */,
 				01C8C7CA289C427100DE2BED /* ViewController.swift */,
@@ -129,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C8C7D6289C427500DE2BED /* LaunchScreen.storyboard in Resources */,
+				0137794228A135F500325362 /* Words.json in Resources */,
 				01C8C7D3289C427500DE2BED /* Assets.xcassets in Resources */,
 				01C8C7CE289C427100DE2BED /* Main.storyboard in Resources */,
 			);
@@ -141,9 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0137794828A13AB700325362 /* WordsViewerViewController.swift in Sources */,
+				0137794B28A1506F00325362 /* Word.swift in Sources */,
 				01C8C7CB289C427100DE2BED /* ViewController.swift in Sources */,
+				0137794528A137E800325362 /* JSONWorker.swift in Sources */,
 				01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */,
 				01C8C7D1289C427100DE2BED /* AliasLite.xcdatamodeld in Sources */,
+				0137794D28A2569A00325362 /* WordsReader.swift in Sources */,
 				01C8C7C9289C427100DE2BED /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
