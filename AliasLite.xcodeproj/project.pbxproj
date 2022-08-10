@@ -14,6 +14,7 @@
 		0137794D28A2569A00325362 /* WordsReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794C28A2569A00325362 /* WordsReader.swift */; };
 		0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794E28A3F29F00325362 /* PlayersManager.swift */; };
 		0137795128A3F2E400325362 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795028A3F2E400325362 /* Player.swift */; };
+		0137795528A3FF7B00325362 /* GameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795428A3FF7B00325362 /* GameSettingsViewController.swift */; };
 		01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C6289C427100DE2BED /* AppDelegate.swift */; };
 		01C8C7C9289C427100DE2BED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C8289C427100DE2BED /* SceneDelegate.swift */; };
 		01C8C7CB289C427100DE2BED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CA289C427100DE2BED /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		0137794C28A2569A00325362 /* WordsReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReader.swift; sourceTree = "<group>"; };
 		0137794E28A3F29F00325362 /* PlayersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersManager.swift; sourceTree = "<group>"; };
 		0137795028A3F2E400325362 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0137795428A3FF7B00325362 /* GameSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewController.swift; sourceTree = "<group>"; };
 		01C8C7C3289C427100DE2BED /* AliasLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AliasLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C8C7C6289C427100DE2BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C8C7C8289C427100DE2BED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				0137794728A13AB700325362 /* WordsViewerViewController.swift */,
+				01C8C7CA289C427100DE2BED /* ViewController.swift */,
+				0137795428A3FF7B00325362 /* GameSettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -113,7 +117,6 @@
 				0137794328A136EA00325362 /* Managers */,
 				01C8C7C6289C427100DE2BED /* AppDelegate.swift */,
 				01C8C7C8289C427100DE2BED /* SceneDelegate.swift */,
-				01C8C7CA289C427100DE2BED /* ViewController.swift */,
 				01C8C7CC289C427100DE2BED /* Main.storyboard */,
 				01C8C7D2289C427500DE2BED /* Assets.xcassets */,
 				01C8C7D4289C427500DE2BED /* LaunchScreen.storyboard */,
@@ -203,6 +206,7 @@
 				01C8C7D1289C427100DE2BED /* AliasLite.xcdatamodeld in Sources */,
 				0137794D28A2569A00325362 /* WordsReader.swift in Sources */,
 				01C8C7C9289C427100DE2BED /* SceneDelegate.swift in Sources */,
+				0137795528A3FF7B00325362 /* GameSettingsViewController.swift in Sources */,
 				0137795128A3F2E400325362 /* Player.swift in Sources */,
 				0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */,
 			);

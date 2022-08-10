@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
-        button.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
     
@@ -46,7 +46,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getWords()
         getTopPlayers()
         addConstraints()
     }
@@ -91,17 +90,15 @@ class ViewController: UIViewController {
         ])
     }
     
-    private func getWords() {
-        words = WordsReader.getWords()
+    @objc private func startNewGamePressed() {
+        let gameSettings = GameSettingsViewController()
+        gameSettings.modalPresentationStyle = .fullScreen
+        present(gameSettings, animated: true)
     }
     
     private func getTopPlayers() {
         topPlayers = PlayersManager.shared.getTopPlayers()
     }
-    
-   @objc private func startButtonPressed() {
-       currentWord.text = words.randomElement()?.text ?? "No word"
-   }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
