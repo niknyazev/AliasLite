@@ -22,6 +22,14 @@ class ViewController: UIViewController {
         return button
     }()
     
+    private lazy var lastGames: UITableView = {
+        let result = UITableView()
+        result.dataSource = self
+        result.delegate = self
+        result.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        return result
+    }()
+    
     private lazy var currentWord: UILabel = {
         let label = UILabel()
         label.text = "Word"
@@ -31,12 +39,15 @@ class ViewController: UIViewController {
     }()
 
     var words: [Word] = []
+    var topPlayers: [Player] = []
+    let cellID = "playerData"
     
     // MARK: - ViewController life circle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getWords()
+        getTopPlayers()
         addConstraints()
     }
     
@@ -44,11 +55,12 @@ class ViewController: UIViewController {
     
     func addConstraints() {
         
-        // Button
-        
         view.addSubview(getWordButton)
         view.addSubview(currentWord)
-        
+        view.addSubview(lastGames)
+
+        // Button
+                
         getWordButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -66,14 +78,47 @@ class ViewController: UIViewController {
             currentWord.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             currentWord.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
+        
+        // Table view
+        
+        lastGames.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            lastGames.topAnchor.constraint(equalTo: currentWord.bottomAnchor, constant: 50),
+            lastGames.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            lastGames.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            lastGames.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+        ])
     }
     
     private func getWords() {
         words = WordsReader.getWords()
     }
     
+    private func getTopPlayers() {
+        topPlayers = PlayersManager.shared.getTopPlayers()
+    }
+    
    @objc private func startButtonPressed() {
        currentWord.text = words.randomElement()?.text ?? "No word"
    }
+}
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        topPlayers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let player = topPlayers[indexPath.row]
+        var content = cell.defaultContentConfiguration()
+        content.text = player.name
+        content.secondaryText = "\(player.score)"
+        cell.contentConfiguration = content
+        return cell
+    }
 }
 
