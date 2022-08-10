@@ -11,10 +11,10 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var getWordButton: UIButton = {
+    private lazy var startNewGame: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("Press to get the Word", for: .normal)
+        button.setTitle("New game", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private lazy var lastGames: UITableView = {
+    private lazy var tableTopPlayers: UITableView = {
         let result = UITableView()
         result.dataSource = self
         result.delegate = self
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     private lazy var currentWord: UILabel = {
         let label = UILabel()
-        label.text = "Word"
+        label.text = "Top players"
         label.font = .systemFont(ofSize: 20)
         label.textColor = .black
         return label
@@ -55,39 +55,39 @@ class ViewController: UIViewController {
     
     func addConstraints() {
         
-        view.addSubview(getWordButton)
+        view.addSubview(startNewGame)
         view.addSubview(currentWord)
-        view.addSubview(lastGames)
-
-        // Button
-                
-        getWordButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            getWordButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            getWordButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            getWordButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
+        view.addSubview(tableTopPlayers)
         
         // Label
         
         currentWord.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            currentWord.topAnchor.constraint(equalTo: getWordButton.bottomAnchor, constant: 50),
+            currentWord.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             currentWord.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             currentWord.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
+        // Button
+        
+        startNewGame.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            startNewGame.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            startNewGame.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            startNewGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
         // Table view
         
-        lastGames.translatesAutoresizingMaskIntoConstraints = false
+        tableTopPlayers.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            lastGames.topAnchor.constraint(equalTo: currentWord.bottomAnchor, constant: 50),
-            lastGames.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            lastGames.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            lastGames.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+            tableTopPlayers.topAnchor.constraint(equalTo: currentWord.bottomAnchor, constant: 30),
+            tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableTopPlayers.bottomAnchor.constraint(equalTo: startNewGame.topAnchor, constant: -30)
         ])
     }
     
