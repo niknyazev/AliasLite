@@ -16,16 +16,18 @@ class CurrentSessionViewController: UIViewController {
             timerLabel.text = "\(time)"
         }
     }
+    var words: [Word] = []
+    var currentWordIndex = 0
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
-        let result = UIStackView(arrangedSubviews: [guessWordButton, dropWordButton])
+        let result = UIStackView(arrangedSubviews: [dropWordButton, guessWordButton])
         result.distribution = .fillEqually
         result.spacing = 10
         return result
     }()
     
     private lazy var sessionControlButtonsStack: UIStackView = {
-        let result = UIStackView(arrangedSubviews: [startPauseButton, finishButton])
+        let result = UIStackView(arrangedSubviews: [finishButton, startPauseButton])
         result.distribution = .fillEqually
         result.spacing = 10
         return result
@@ -38,7 +40,7 @@ class CurrentSessionViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
-        button.addTarget(self, action: #selector(startPausePressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextWordPressed), for: .touchUpInside)
         return button
     }()
     
@@ -56,7 +58,7 @@ class CurrentSessionViewController: UIViewController {
     private lazy var startPauseButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("New game", for: .normal)
+        button.setTitle("Start", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -67,7 +69,7 @@ class CurrentSessionViewController: UIViewController {
     private lazy var finishButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("New game", for: .normal)
+        button.setTitle("Finish", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -100,25 +102,42 @@ class CurrentSessionViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        
+        // TODO: remove
+        view.backgroundColor = .green
+        
         super.viewDidLoad()
         addConstraints()
-        view.backgroundColor = .green
+        getWords()
+    }
+    
+    private func getWords() {
+        words = WordsReader.getWords().shuffled()
     }
     
     private func addConstraints() {
         
         view.addSubview(wordsManagingButtonsStack)
+        view.addSubview(sessionControlButtonsStack)
         view.addSubview(timerLabel)
         view.addSubview(currentWordLabel)
                         
+        sessionControlButtonsStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sessionControlButtonsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            sessionControlButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            sessionControlButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: sessionControlButtonsStack.topAnchor, constant: -20),
             wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
-        
+                
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -132,6 +151,17 @@ class CurrentSessionViewController: UIViewController {
             currentWordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentWordLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    @objc private func nextWordPressed() {
+        
+        if currentWordIndex >= words.count {
+            currentWordIndex = 0
+            return
+        }
+        
+        currentWordLabel.text = words[currentWordIndex].text
+        currentWordIndex += 1
     }
     
     @objc private func startPausePressed() {
