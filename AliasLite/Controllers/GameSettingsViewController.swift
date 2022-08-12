@@ -8,6 +8,17 @@
 import UIKit
 
 class GameSettingsViewController: UIViewController {
+    
+    let players = PlayersManager.shared.getTopPlayers()
+    let cellID = "player"
+    
+    private lazy var playersTable: UITableView = {
+        let result = UITableView()
+        result.dataSource = self
+        result.delegate = self
+        result.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        return result
+    }()
 
     private lazy var startGame: UIButton = {
         let button = UIButton()
@@ -31,6 +42,7 @@ class GameSettingsViewController: UIViewController {
     private func addConstraints() {
         
         view.addSubview(startGame)
+        view.addSubview(playersTable)
                 
         // Button
         
@@ -41,20 +53,16 @@ class GameSettingsViewController: UIViewController {
             startGame.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             startGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
-
+        
+        playersTable.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            playersTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            playersTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            playersTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            playersTable.bottomAnchor.constraint(equalTo: startGame.topAnchor, constant: -50)
+        ])
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @objc private func startGamePressed() {
         let gameSettings = CurrentSessionViewController()
@@ -62,4 +70,36 @@ class GameSettingsViewController: UIViewController {
         present(gameSettings, animated: true)
     }
 
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension GameSettingsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        players.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let player = players[indexPath.row]
+        var content = cell.defaultContentConfiguration()
+        content.text = player.name
+        cell.selectionStyle = .none
+        cell.contentConfiguration = content
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        guard let cell = cell else {
+            return
+        }
+        
+        cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
+    }
 }
