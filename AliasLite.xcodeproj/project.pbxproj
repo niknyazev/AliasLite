@@ -17,7 +17,7 @@
 		0137795728A41A0800325362 /* CurrentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795628A41A0800325362 /* CurrentSessionViewController.swift */; };
 		01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C6289C427100DE2BED /* AppDelegate.swift */; };
 		01C8C7C9289C427100DE2BED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7C8289C427100DE2BED /* SceneDelegate.swift */; };
-		01C8C7CB289C427100DE2BED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CA289C427100DE2BED /* ViewController.swift */; };
+		01C8C7CB289C427100DE2BED /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CA289C427100DE2BED /* StartViewController.swift */; };
 		01C8C7D1289C427100DE2BED /* AliasLite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CF289C427100DE2BED /* AliasLite.xcdatamodeld */; };
 		01C8C7D3289C427500DE2BED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D2289C427500DE2BED /* Assets.xcassets */; };
 		01C8C7D6289C427500DE2BED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D4289C427500DE2BED /* LaunchScreen.storyboard */; };
@@ -35,7 +35,7 @@
 		01C8C7C3289C427100DE2BED /* AliasLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AliasLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C8C7C6289C427100DE2BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C8C7C8289C427100DE2BED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		01C8C7CA289C427100DE2BED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		01C8C7CA289C427100DE2BED /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		01C8C7D0289C427100DE2BED /* AliasLite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AliasLite.xcdatamodel; sourceTree = "<group>"; };
 		01C8C7D2289C427500DE2BED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C8C7D5289C427500DE2BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -74,9 +74,9 @@
 		0137794628A13A6D00325362 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				01C8C7CA289C427100DE2BED /* ViewController.swift */,
-				0137795428A3FF7B00325362 /* GameSettingsViewController.swift */,
-				0137795628A41A0800325362 /* CurrentSessionViewController.swift */,
+				01AFF4E628A7C380001C25FB /* Start */,
+				01AFF4E728A7C388001C25FB /* GameSettings */,
+				01AFF4E828A7C393001C25FB /* CurrentSession */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -88,6 +88,30 @@
 				0137795028A3F2E400325362 /* Player.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		01AFF4E628A7C380001C25FB /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				01C8C7CA289C427100DE2BED /* StartViewController.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		01AFF4E728A7C388001C25FB /* GameSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0137795428A3FF7B00325362 /* GameSettingsViewController.swift */,
+			);
+			path = GameSettings;
+			sourceTree = "<group>";
+		};
+		01AFF4E828A7C393001C25FB /* CurrentSession */ = {
+			isa = PBXGroup;
+			children = (
+				0137795628A41A0800325362 /* CurrentSessionViewController.swift */,
+			);
+			path = CurrentSession;
 			sourceTree = "<group>";
 		};
 		01C8C7BA289C427100DE2BED = {
@@ -195,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0137794B28A1506F00325362 /* Word.swift in Sources */,
-				01C8C7CB289C427100DE2BED /* ViewController.swift in Sources */,
+				01C8C7CB289C427100DE2BED /* StartViewController.swift in Sources */,
 				0137795728A41A0800325362 /* CurrentSessionViewController.swift in Sources */,
 				0137794528A137E800325362 /* JSONWorker.swift in Sources */,
 				01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */,
