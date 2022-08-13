@@ -7,9 +7,11 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
+class MainScreenViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private let viewModel: MainScreenViewModelProtocol = MainScreenViewModel()
     
     private lazy var startNewGame: UIButton = {
         let button = UIButton()
@@ -38,8 +40,6 @@ class StartViewController: UIViewController {
         return label
     }()
 
-    var words: [Word] = []
-    var topPlayers: [Player] = []
     let cellID = "playerData"
     
     // MARK: - ViewController life circle
@@ -48,7 +48,6 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         // TODO: remove
         view.backgroundColor = .white
-        getTopPlayers()
         addConstraints()
     }
     
@@ -96,22 +95,18 @@ class StartViewController: UIViewController {
         let gameSettings = GameSettingsViewController()
         navigationController?.pushViewController(gameSettings, animated: true)
     }
-    
-    private func getTopPlayers() {
-        topPlayers = PlayersManager.shared.getTopPlayers()
-    }
 }
 
-extension StartViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        topPlayers.count
+        viewModel.playersCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let player = topPlayers[indexPath.row]
+        let player = viewModel.getPlayerData(for: indexPath.row)
         var content = cell.defaultContentConfiguration()
         content.text = player.name
         content.secondaryText = "\(player.score)"
