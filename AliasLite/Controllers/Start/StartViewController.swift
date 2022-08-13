@@ -94,8 +94,7 @@ class StartViewController: UIViewController {
     
     @objc private func startNewGamePressed() {
         let gameSettings = GameSettingsViewController()
-        gameSettings.modalPresentationStyle = .fullScreen
-        present(gameSettings, animated: true)
+        navigationController?.pushViewController(gameSettings, animated: true)
     }
     
     private func getTopPlayers() {

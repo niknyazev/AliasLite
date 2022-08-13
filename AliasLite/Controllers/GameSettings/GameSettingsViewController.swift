@@ -65,9 +65,9 @@ class GameSettingsViewController: UIViewController {
     }
     
     @objc private func startGamePressed() {
-        let gameSettings = CurrentSessionViewController()
-        gameSettings.modalPresentationStyle = .fullScreen
-        present(gameSettings, animated: true)
+        let gameSession = CurrentSessionViewController()
+        gameSession.modalPresentationStyle = .fullScreen
+        present(gameSession, animated: true)
     }
 
 }

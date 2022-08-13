@@ -186,6 +186,7 @@ class CurrentSessionViewController: UIViewController {
         
         if time == 0 {
             timer.invalidate()
+            view.backgroundColor = .red
         }
     }
 }
