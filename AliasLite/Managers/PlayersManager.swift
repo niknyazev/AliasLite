@@ -13,14 +13,17 @@ final class PlayersManager {
     
     private init() { }
     
+    private var players = [
+        Player(name: "Nick", score: 10),
+        Player(name: "Maya", score: 20),
+        Player(name: "Jack", score: 5)
+    ]
+    
     func getTopPlayers() -> [Player] {
-     
-        let result = [
-            Player(name: "Nick", score: 10),
-            Player(name: "Maya", score: 20),
-            Player(name: "Jack", score: 5)
-        ]
-        
-        return result
+        players
+    }
+    
+    func savePlayer(name: String) {
+        players.append(Player(name: name, score: 0))
     }
 }

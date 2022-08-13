@@ -9,8 +9,9 @@ import UIKit
 
 class GameSettingsViewController: UIViewController {
     
-    let players = PlayersManager.shared.getTopPlayers()
     let cellID = "player"
+    
+    private let viewModel: GameSettingsViewModelProtocol = GameSettingsViewModel()
     
     private lazy var playersTable: UITableView = {
         let result = UITableView()
@@ -35,8 +36,42 @@ class GameSettingsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .red
         addConstraints()
+        setupElements()
+    }
+    
+    private func setupElements() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewPlayer)
+        )
+    }
+    
+    @objc private func addNewPlayer() {
+        
+        let alertController = UIAlertController(
+            title: "Add new Player",
+            message: "Enter the player name",
+            preferredStyle: .alert
+        )
 
-        // Do any additional setup after loading the view.
+        alertController.addTextField { textField in
+            textField.placeholder = "Name"
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            guard let newValue = alertController.textFields?.first?.text else { return }
+            self.viewModel.savePlayer(name: newValue)
+            self.playersTable.reloadData()
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
     
     private func addConstraints() {
@@ -77,15 +112,14 @@ class GameSettingsViewController: UIViewController {
 extension GameSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        players.count
+        viewModel.playersCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let player = players[indexPath.row]
         var content = cell.defaultContentConfiguration()
-        content.text = player.name
+        content.text = viewModel.getPlayerName(index: indexPath.row)
         cell.selectionStyle = .none
         cell.contentConfiguration = content
         
