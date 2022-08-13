@@ -46,6 +46,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: remove
+        view.backgroundColor = .white
         getTopPlayers()
         addConstraints()
     }
