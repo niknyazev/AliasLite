@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol PlayerDataProtocol {
+protocol PlayerDataViewModelProtocol {
     var name: String { get }
     var score: Int { get }
 }
 
-class PlayerData: PlayerDataProtocol {
+class PlayerData: PlayerDataViewModelProtocol {
     
     var name: String
     var score: Int
@@ -24,10 +24,8 @@ class PlayerData: PlayerDataProtocol {
 }
 
 protocol MainScreenViewModelProtocol {
-    
     var playersCount: Int { get }
-    
-    func getPlayerData(for index: Int) -> PlayerDataProtocol
+    func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol
 }
 
 class MainScreenViewModel: MainScreenViewModelProtocol {
@@ -42,7 +40,7 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
         topPlayers = PlayersManager.shared.getTopPlayers()
     }
 
-    func getPlayerData(for index: Int) -> PlayerDataProtocol {
+    func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol {
         PlayerData(player: topPlayers[index])
     }
 }
