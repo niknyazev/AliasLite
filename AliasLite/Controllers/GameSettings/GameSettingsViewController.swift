@@ -100,7 +100,7 @@ class GameSettingsViewController: UIViewController {
     }
     
     @objc private func startGamePressed() {
-        let gameSession = CurrentSessionViewController()
+        let gameSession = UINavigationController(rootViewController: CurrentSessionViewController())
         gameSession.modalPresentationStyle = .fullScreen
         present(gameSession, animated: true)
     }

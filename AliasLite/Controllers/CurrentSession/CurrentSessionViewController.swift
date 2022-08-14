@@ -109,10 +109,45 @@ class CurrentSessionViewController: UIViewController {
         super.viewDidLoad()
         addConstraints()
         getWords()
+        setupElements()
     }
     
     private func getWords() {
         words = WordsReader.getWords().shuffled()
+    }
+    
+    private func setupElements() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(menuPressed)
+        )
+    }
+    
+    @objc private func menuPressed() {
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let logAction = UIAlertAction(title: "Log", style: .default) { _ in
+            print("Log")
+        }
+        
+        let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
+            print("Log")
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(logAction)
+        alertController.addAction(gameSettings)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
     
     private func addConstraints() {
