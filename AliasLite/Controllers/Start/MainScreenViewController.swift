@@ -32,7 +32,7 @@ class MainScreenViewController: UIViewController {
         return result
     }()
     
-    private lazy var currentWord: UILabel = {
+    private lazy var tableDescription: UILabel = {
         let label = UILabel()
         label.text = "Top players"
         label.font = .systemFont(ofSize: 20)
@@ -56,17 +56,17 @@ class MainScreenViewController: UIViewController {
     func addConstraints() {
         
         view.addSubview(startNewGame)
-        view.addSubview(currentWord)
+        view.addSubview(tableDescription)
         view.addSubview(tableTopPlayers)
         
         // Label
         
-        currentWord.translatesAutoresizingMaskIntoConstraints = false
+        tableDescription.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            currentWord.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            currentWord.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            currentWord.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            tableDescription.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            tableDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
         // Button
@@ -84,7 +84,7 @@ class MainScreenViewController: UIViewController {
         tableTopPlayers.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            tableTopPlayers.topAnchor.constraint(equalTo: currentWord.bottomAnchor, constant: 30),
+            tableTopPlayers.topAnchor.constraint(equalTo: tableDescription.bottomAnchor, constant: 30),
             tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableTopPlayers.bottomAnchor.constraint(equalTo: startNewGame.topAnchor, constant: -30)

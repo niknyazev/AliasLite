@@ -20,6 +20,14 @@ class GameSettingsViewController: UIViewController {
         result.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         return result
     }()
+    
+    private lazy var tableDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Choose the players:"
+        label.font = .systemFont(ofSize: 20)
+        label.textColor = .black
+        return label
+    }()
 
     private lazy var startGame: UIButton = {
         let button = UIButton()
@@ -34,7 +42,6 @@ class GameSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         addConstraints()
         setupElements()
     }
@@ -46,6 +53,9 @@ class GameSettingsViewController: UIViewController {
             target: self,
             action: #selector(addNewPlayer)
         )
+        
+        title = "New game"
+        view.backgroundColor = .white
     }
     
     @objc private func addNewPlayer() {
@@ -78,7 +88,18 @@ class GameSettingsViewController: UIViewController {
         
         view.addSubview(startGame)
         view.addSubview(playersTable)
+        view.addSubview(tableDescriptionLabel)
                 
+        // Table description
+        
+        tableDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableDescriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            tableDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableDescriptionLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
+        ])
+        
         // Button
         
         startGame.translatesAutoresizingMaskIntoConstraints = false
@@ -89,10 +110,12 @@ class GameSettingsViewController: UIViewController {
             startGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
         
+        // Table players
+        
         playersTable.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            playersTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            playersTable.topAnchor.constraint(equalTo: tableDescriptionLabel.bottomAnchor, constant: 10),
             playersTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             playersTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             playersTable.bottomAnchor.constraint(equalTo: startGame.topAnchor, constant: -50)
