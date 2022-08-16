@@ -10,14 +10,14 @@ import CoreData
 
 class CurrentSessionViewController: UIViewController {
 
-    var timer = Timer()
-    var time = 5 {
+    private var timer = Timer()
+    private var time = 5 {
         didSet {
             timerLabel.text = "\(time)"
         }
     }
-    var words: [Word] = []
-    var currentWordIndex = 0
+    private var words: [Word] = []
+    private var currentWordIndex = 0
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
         let result = UIStackView(arrangedSubviews: [dropWordButton, guessWordButton])
