@@ -28,7 +28,7 @@ class MainScreenViewController: UIViewController {
         let result = UITableView()
         result.dataSource = self
         result.delegate = self
-        result.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        result.register(PlayerCell.self, forCellReuseIdentifier: cellID)
         return result
     }()
     
@@ -43,6 +43,11 @@ class MainScreenViewController: UIViewController {
     let cellID = "playerData"
     
     // MARK: - ViewController life circle
+    
+    override func loadView() {
+        super.loadView()
+        // TODO: need fill this method with viewDidLoad body?
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +122,18 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         content.secondaryText = "\(player.score)"
         cell.contentConfiguration = content
         return cell
+    }
+}
+
+// TODO: Move to another file
+class PlayerCell: UITableViewCell {
+   
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
