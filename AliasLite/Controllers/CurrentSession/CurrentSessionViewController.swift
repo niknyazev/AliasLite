@@ -141,10 +141,15 @@ class CurrentSessionViewController: UIViewController {
             print("Log")
         }
 
+        let endSession = UIAlertAction(title: "End session", style: .destructive) { _ in
+            print("Log")
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
 
         alertController.addAction(logAction)
         alertController.addAction(gameSettings)
+        alertController.addAction(endSession)
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true, completion: nil)
@@ -156,7 +161,20 @@ class CurrentSessionViewController: UIViewController {
         view.addSubview(sessionControlButtonsStack)
         view.addSubview(timerLabel)
         view.addSubview(currentWordLabel)
-                        
+        view.addSubview(playerNameLabel)
+              
+        // Players name
+        
+        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            playerNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            playerNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playerNameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
+        ])
+
+        // Session buttons
+        
         sessionControlButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -164,6 +182,8 @@ class CurrentSessionViewController: UIViewController {
             sessionControlButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             sessionControlButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
+        
+        // Working with word buttons
 
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -173,12 +193,16 @@ class CurrentSessionViewController: UIViewController {
             wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
                 
+        // Timer
+        
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -20)
         ])
+        
+        // Current word
         
         currentWordLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -222,6 +246,22 @@ class CurrentSessionViewController: UIViewController {
         if time == 0 {
             timer.invalidate()
             view.backgroundColor = .red
+            showAlertTimeIsOver()
         }
+    }
+    
+    private func showAlertTimeIsOver() {
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: "Time is over. Pass the phone to the Team",
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        }
+
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
