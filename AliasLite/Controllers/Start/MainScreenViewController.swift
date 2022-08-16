@@ -19,7 +19,7 @@ class MainScreenViewController: UIViewController {
         button.setTitle("New game", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
@@ -49,24 +49,29 @@ class MainScreenViewController: UIViewController {
         // TODO: remove
         view.backgroundColor = .white
         addConstraints()
+        setupElements()
     }
     
-    // MARK: - Methods
+    // MARK: - Private methods
     
-    func addConstraints() {
+    private func setupElements() {
+        title = "Alias"
+    }
+    
+    private func addConstraints() {
         
         view.addSubview(startNewGame)
         view.addSubview(tableDescription)
         view.addSubview(tableTopPlayers)
         
-        // Label
+        // Table description
         
         tableDescription.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            tableDescription.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            tableDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            tableDescription.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            tableDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableDescription.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
         ])
         
         // Button
@@ -74,9 +79,9 @@ class MainScreenViewController: UIViewController {
         startNewGame.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            startNewGame.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            startNewGame.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            startNewGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            startNewGame.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            startNewGame.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startNewGame.widthAnchor.constraint(greaterThanOrEqualToConstant: 170)
         ])
         
         // Table view
@@ -84,7 +89,7 @@ class MainScreenViewController: UIViewController {
         tableTopPlayers.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            tableTopPlayers.topAnchor.constraint(equalTo: tableDescription.bottomAnchor, constant: 30),
+            tableTopPlayers.topAnchor.constraint(equalTo: tableDescription.bottomAnchor, constant: 20),
             tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableTopPlayers.bottomAnchor.constraint(equalTo: startNewGame.topAnchor, constant: -30)
