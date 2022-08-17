@@ -7,20 +7,12 @@
 
 import UIKit
 
-class GameSettingsViewController: UIViewController {
+class GameSettingsViewController: UITableViewController {
     
     let cellID = "player"
     
     private let viewModel: GameSettingsViewModelProtocol = GameSettingsViewModel()
-    
-    private lazy var playersTable: UITableView = {
-        let result = UITableView()
-        result.dataSource = self
-        result.delegate = self
-        result.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        return result
-    }()
-    
+        
     private lazy var tableDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Choose the players:"
@@ -54,8 +46,13 @@ class GameSettingsViewController: UIViewController {
             action: #selector(addNewPlayer)
         )
         
-        title = "New game"
+        title = "New game settings"
         view.backgroundColor = .white
+        
+        tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
     }
     
     @objc private func addNewPlayer() {
@@ -73,7 +70,7 @@ class GameSettingsViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let newValue = alertController.textFields?.first?.text else { return }
             self.viewModel.savePlayer(name: newValue)
-            self.playersTable.reloadData()
+//            self.playersTable.reloadData()
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
@@ -86,40 +83,40 @@ class GameSettingsViewController: UIViewController {
     
     private func addConstraints() {
         
-        view.addSubview(startGame)
-        view.addSubview(playersTable)
-        view.addSubview(tableDescriptionLabel)
-                
-        // Table description
-        
-        tableDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            tableDescriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            tableDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            tableDescriptionLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
-        ])
+//        view.addSubview(startGame)
+//        view.addSubview(playersTable)
+//        view.addSubview(tableDescriptionLabel)
+//
+//        // Table description
+//
+//        tableDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            tableDescriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+//            tableDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            tableDescriptionLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
+//        ])
         
         // Button
         
-        startGame.translatesAutoresizingMaskIntoConstraints = false
+//        startGame.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            startGame.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+//            startGame.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+//            startGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+//        ])
         
-        NSLayoutConstraint.activate([
-            startGame.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            startGame.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            startGame.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
-        ])
-        
-        // Table players
-        
-        playersTable.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            playersTable.topAnchor.constraint(equalTo: tableDescriptionLabel.bottomAnchor, constant: 10),
-            playersTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            playersTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            playersTable.bottomAnchor.constraint(equalTo: startGame.topAnchor, constant: -50)
-        ])
+//        // Table players
+//
+//        playersTable.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            playersTable.topAnchor.constraint(equalTo: tableDescriptionLabel.bottomAnchor, constant: 10),
+//            playersTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            playersTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            playersTable.bottomAnchor.constraint(equalTo: startGame.topAnchor, constant: -50)
+//        ])
     }
     
     @objc private func startGamePressed() {
@@ -132,24 +129,51 @@ class GameSettingsViewController: UIViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension GameSettingsViewController: UITableViewDelegate, UITableViewDataSource {
+extension GameSettingsViewController {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.playersCount
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return viewModel.playersCount
+        } else {
+            return 1
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        3
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Select the players:"
+        }
+        
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = viewModel.getPlayerName(index: indexPath.row)
-        cell.selectionStyle = .none
-        cell.contentConfiguration = content
+        
+        if indexPath.section == 0 {
+            content.text = viewModel.getPlayerName(index: indexPath.row)
+            cell.selectionStyle = .none
+            cell.contentConfiguration = content
+        } else if indexPath.section == 1 {
+            content.text = "Session time"
+            cell.contentConfiguration = content
+        } else {
+            content.text = "Start"
+            cell.contentConfiguration = content
+            cell.tintColor = .blue
+        }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
         
