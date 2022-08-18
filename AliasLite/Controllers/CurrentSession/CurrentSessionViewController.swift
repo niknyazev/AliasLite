@@ -26,13 +26,6 @@ class CurrentSessionViewController: UIViewController {
         return result
     }()
     
-    private lazy var sessionControlButtonsStack: UIStackView = {
-        let result = UIStackView(arrangedSubviews: [finishButton, startPauseButton])
-        result.distribution = .fillEqually
-        result.spacing = 10
-        return result
-    }()
-    
     private lazy var guessWordButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
@@ -66,17 +59,6 @@ class CurrentSessionViewController: UIViewController {
         return button
     }()
         
-    private lazy var finishButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("Finish", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-//        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var currentWordLabel: UILabel = {
         let label = UILabel()
         label.text = "Any word"
@@ -158,7 +140,7 @@ class CurrentSessionViewController: UIViewController {
     private func addConstraints() {
         
         view.addSubview(wordsManagingButtonsStack)
-        view.addSubview(sessionControlButtonsStack)
+        view.addSubview(startPauseButton)
         view.addSubview(timerLabel)
         view.addSubview(currentWordLabel)
         view.addSubview(playerNameLabel)
@@ -175,12 +157,12 @@ class CurrentSessionViewController: UIViewController {
 
         // Session buttons
         
-        sessionControlButtonsStack.translatesAutoresizingMaskIntoConstraints = false
+        startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            sessionControlButtonsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            sessionControlButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            sessionControlButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            startPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startPauseButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
         
         // Working with word buttons
@@ -188,7 +170,7 @@ class CurrentSessionViewController: UIViewController {
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: sessionControlButtonsStack.topAnchor, constant: -20),
+            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: startPauseButton.topAnchor, constant: -20),
             wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
@@ -224,6 +206,12 @@ class CurrentSessionViewController: UIViewController {
     }
     
     @objc private func startPausePressed() {
+        
+        if startPauseButton.currentTitle == "Start" {
+            startPauseButton.setTitle("Pause", for: .normal)
+        } else {
+            startPauseButton.setTitle("Start", for: .normal)
+        }
         
         if timer.isValid {
             timer.invalidate()

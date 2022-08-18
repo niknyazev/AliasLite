@@ -74,7 +74,7 @@ class GameSettingsViewController: UITableViewController {
         
         let alertController = UIAlertController(
             title: nil,
-            message: "Enter the duration of session",
+            message: "Enter duration of session",
             preferredStyle: .alert
         )
 
