@@ -20,17 +20,6 @@ class GameSettingsViewController: UITableViewController {
         label.textColor = .black
         return label
     }()
-
-    private lazy var startGame: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("New game", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-        button.addTarget(self, action: #selector(startGamePressed), for: .touchUpInside)
-        return button
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +70,30 @@ class GameSettingsViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    private func changeSessionDuration() {
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: "Enter the duration of session",
+            preferredStyle: .alert
+        )
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Duration"
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            guard let newValue = alertController.textFields?.first?.text else { return }
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+    
     private func addConstraints() {
         
 //        view.addSubview(startGame)
@@ -119,7 +132,7 @@ class GameSettingsViewController: UITableViewController {
 //        ])
     }
     
-    @objc private func startGamePressed() {
+    private func startGamePressed() {
         let gameSession = UINavigationController(rootViewController: CurrentSessionViewController())
         gameSession.modalPresentationStyle = .fullScreen
         present(gameSession, animated: true)
@@ -175,12 +188,20 @@ extension GameSettingsViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath)
-        
-        guard let cell = cell else {
-            return
+        if indexPath.section == 0 {
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            
+            guard let cell = cell else {
+                return
+            }
+            
+            cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
+            
+        } else if indexPath.section == 1 {
+            changeSessionDuration()
+        } else {
+            startGamePressed()
         }
-        
-        cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
     }
 }
