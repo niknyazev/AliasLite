@@ -32,7 +32,7 @@ class CurrentSessionViewController: UIViewController {
         button.setTitle("Guess", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(nextWordPressed), for: .touchUpInside)
         return button
     }()
@@ -43,7 +43,7 @@ class CurrentSessionViewController: UIViewController {
         button.setTitle("Drop", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 10
 //        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
@@ -92,6 +92,10 @@ class CurrentSessionViewController: UIViewController {
         addConstraints()
         getWords()
         setupElements()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        startPauseButton.layer.cornerRadius = startPauseButton.frame.height / 2
     }
     
     private func getWords() {
@@ -155,14 +159,15 @@ class CurrentSessionViewController: UIViewController {
             playerNameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
         ])
 
-        // Session buttons
+        // Start/pause buttons
         
         startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            startPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            startPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startPauseButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
+            startPauseButton.widthAnchor.constraint(equalToConstant: 80),
+            startPauseButton.heightAnchor.constraint(equalToConstant: 80)
         ])
         
         // Working with word buttons
@@ -170,9 +175,10 @@ class CurrentSessionViewController: UIViewController {
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: startPauseButton.topAnchor, constant: -20),
-            wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: startPauseButton.topAnchor, constant: -40),
+            wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            wordsManagingButtonsStack.heightAnchor.constraint(equalToConstant: 110)
         ])
                 
         // Timer
@@ -181,7 +187,7 @@ class CurrentSessionViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -20)
+            timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -40)
         ])
         
         // Current word
