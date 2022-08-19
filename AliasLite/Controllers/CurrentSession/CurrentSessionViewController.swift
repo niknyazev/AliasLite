@@ -84,14 +84,12 @@ class CurrentSessionViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
-        
-        // TODO: remove
-        view.backgroundColor = .green
-        
         super.viewDidLoad()
         addConstraints()
         getWords()
         setupElements()
+        // TODO: refactoring
+        fillViewWithData(playerName: PlayersManager.shared.getTopPlayers()[0].name)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,6 +100,11 @@ class CurrentSessionViewController: UIViewController {
         words = WordsReader.getWords().shuffled()
     }
     
+    private func fillViewWithData(playerName: String) {
+        playerNameLabel.text = playerName
+        currentWordLabel.text = "Press start"
+    }
+    
     private func setupElements() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis.circle"),
@@ -109,6 +112,7 @@ class CurrentSessionViewController: UIViewController {
             target: self,
             action: #selector(menuPressed)
         )
+        view.backgroundColor = .white
     }
     
     @objc private func menuPressed() {
@@ -239,7 +243,6 @@ class CurrentSessionViewController: UIViewController {
         
         if time == 0 {
             timer.invalidate()
-            view.backgroundColor = .red
             showAlertTimeIsOver()
         }
     }
@@ -253,6 +256,7 @@ class CurrentSessionViewController: UIViewController {
         )
 
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.fillViewWithData(playerName: PlayersManager.shared.getTopPlayers()[1].name)
         }
 
         alertController.addAction(okAction)
