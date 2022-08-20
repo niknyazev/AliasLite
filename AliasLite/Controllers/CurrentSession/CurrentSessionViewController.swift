@@ -13,7 +13,7 @@ class CurrentSessionViewController: UIViewController {
     private var timer = Timer()
     private var time = 5 {
         didSet {
-            timerLabel.text = "\(time)"
+            startPauseButton.setTitle("\(time)", for: .normal)
         }
     }
     private var words: [Word] = []
@@ -68,11 +68,11 @@ class CurrentSessionViewController: UIViewController {
     
     private lazy var startPauseButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
+        button.backgroundColor = UIColor.lightGray
         button.setTitle("Start", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(startPausePressed), for: .touchUpInside)
         return button
     }()
@@ -80,26 +80,26 @@ class CurrentSessionViewController: UIViewController {
     private lazy var currentWordLabel: UILabel = {
         let label = UILabel()
         label.text = "Any word"
-        label.font = .systemFont(ofSize: 20)
-        label.textColor = .black
-        return label
-    }()
-    
-    private lazy var playerNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "User name"
         label.font = .systemFont(ofSize: 30)
         label.textColor = .black
         return label
     }()
     
-    private lazy var timerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "001"
-        label.font = .systemFont(ofSize: 30)
-        label.textColor = .black
-        return label
-    }()
+//    private lazy var playerNameLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "User name"
+//        label.font = .systemFont(ofSize: 20)
+//        label.textColor = .black
+//        return label
+//    }()
+    
+//    private lazy var timerLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "\(time)"
+//        label.font = .systemFont(ofSize: 30)
+//        label.textColor = .blue
+//        return label
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,16 +110,12 @@ class CurrentSessionViewController: UIViewController {
         fillViewWithData(playerName: PlayersManager.shared.getTopPlayers()[0].name)
     }
     
-    override func viewDidLayoutSubviews() {
-        startPauseButton.layer.cornerRadius = startPauseButton.frame.height / 2
-    }
-    
     private func getWords() {
         words = WordsReader.getWords().shuffled()
     }
     
     private func fillViewWithData(playerName: String) {
-        playerNameLabel.text = playerName
+        title = playerName
         currentWordLabel.text = "Press start"
     }
     
@@ -167,50 +163,47 @@ class CurrentSessionViewController: UIViewController {
         
         view.addSubview(wordsManagingButtonsStack)
         view.addSubview(startPauseButton)
-        view.addSubview(timerLabel)
         view.addSubview(currentWordLabel)
-        view.addSubview(playerNameLabel)
+//        view.addSubview(playerNameLabel)
               
         // Players name
         
-        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            playerNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            playerNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playerNameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
-        ])
-
-        // Start/pause buttons
-        
-        startPauseButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            startPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startPauseButton.widthAnchor.constraint(equalToConstant: 80),
-            startPauseButton.heightAnchor.constraint(equalToConstant: 80)
-        ])
+//        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            playerNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+//            playerNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            playerNameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
+//        ])
         
         // Working with word buttons
 
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: startPauseButton.topAnchor, constant: -40),
+            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             wordsManagingButtonsStack.heightAnchor.constraint(equalToConstant: 110)
         ])
                 
-        // Timer
-        
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -40)
+            startPauseButton.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -30),
+            startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startPauseButton.widthAnchor.constraint(equalToConstant: 120),
+            startPauseButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+//        // Timer
+//
+//        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -40)
+//        ])
         
         // Current word
         
@@ -234,13 +227,7 @@ class CurrentSessionViewController: UIViewController {
     }
     
     @objc private func startPausePressed() {
-        
-        if startPauseButton.currentTitle == "Start" {
-            startPauseButton.setTitle("Pause", for: .normal)
-        } else {
-            startPauseButton.setTitle("Start", for: .normal)
-        }
-        
+                
         if timer.isValid {
             timer.invalidate()
             return
