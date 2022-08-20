@@ -28,22 +28,40 @@ class CurrentSessionViewController: UIViewController {
     
     private lazy var guessWordButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
+        button.backgroundColor = .green
         button.setTitle("Guess", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(nextWordPressed), for: .touchUpInside)
+        
+        // Shadow
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 3
+        button.layer.cornerRadius = 15
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowOpacity = 0.7
+        
         return button
     }()
     
     private lazy var dropWordButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
+        button.backgroundColor = .red
         button.setTitle("Drop", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
+        
+        // Shadow
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 3
+        button.layer.cornerRadius = 15
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowOpacity = 0.7
+        
 //        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
