@@ -18,6 +18,7 @@ class CurrentSessionViewController: UIViewController {
     }
     private var words: [Word] = []
     private var currentWordIndex = 0
+    private let viewModel: CurrentSessionViewModelProtocol = CurrentSessionViewModel()
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
         let result = UIStackView(arrangedSubviews: [dropWordButton, guessWordButton])
@@ -107,16 +108,16 @@ class CurrentSessionViewController: UIViewController {
         getWords()
         setupElements()
         // TODO: refactoring
-        fillViewWithData(playerName: PlayersManager.shared.getTopPlayers()[0].name)
+        fillViewWithData()
     }
     
     private func getWords() {
         words = WordsReader.getWords().shuffled()
     }
     
-    private func fillViewWithData(playerName: String) {
-        title = playerName
-        currentWordLabel.text = "Press start"
+    private func fillViewWithData() {
+        title = viewModel.playerName
+        currentWordLabel.text = viewModel.currentWord
     }
     
     private func setupElements() {
@@ -169,7 +170,7 @@ class CurrentSessionViewController: UIViewController {
         // Players name
         
 //        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
+//
 //        NSLayoutConstraint.activate([
 //            playerNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
 //            playerNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -261,7 +262,7 @@ class CurrentSessionViewController: UIViewController {
         )
 
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.fillViewWithData(playerName: PlayersManager.shared.getTopPlayers()[1].name)
+            self.fillViewWithData()
         }
 
         alertController.addAction(okAction)

@@ -17,8 +17,8 @@ protocol CurrentSessionViewModelProtocol {
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
-    var playerName: String = ""
-    var currentWord: String = ""
+    var playerName: String = "Test player"
+    var currentWord: String = "Press start"
     var wordsDropped: Int = 10
     var wordsGuessed: Int = 10
     
