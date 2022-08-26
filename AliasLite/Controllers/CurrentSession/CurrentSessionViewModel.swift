@@ -13,6 +13,7 @@ protocol CurrentSessionViewModelProtocol {
     var wordsDropped: Int { get }
     var wordsGuessed: Int { get }
     func nextWord()
+    func nextPlayer()
 }
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
@@ -22,7 +23,22 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var wordsDropped: Int = 10
     var wordsGuessed: Int = 10
     
+    private let players = PlayersManager.shared.getTopPlayers()
+    private var currentPlayerIndex = 0
+    private var currentPlayer: Player?
+    
     func nextWord() {
         
+    }
+    
+    func nextPlayer() {
+
+        currentPlayerIndex += 1
+        
+        if currentPlayerIndex >= players.count {
+            currentPlayerIndex = 0
+        }
+
+        currentPlayer = players[currentPlayerIndex]
     }
 }
