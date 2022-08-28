@@ -18,17 +18,26 @@ protocol CurrentSessionViewModelProtocol {
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
-    var playerName: String = "Test player"
-    var currentWord: String = "Press start"
-    var wordsDropped: Int = 10
-    var wordsGuessed: Int = 10
+    var playerName = "Test player"
+    var currentWord = "Press start"
+    var wordsDropped = 10
+    var wordsGuessed = 10
     
     private let players = PlayersManager.shared.getTopPlayers()
     private var currentPlayerIndex = 0
+    private let words = WordsReader.shared.getWords().shuffled()
+    private var currentWordIndex = 0
     private var currentPlayer: Player?
     
     func nextWord() {
         
+        currentWordIndex += 1
+        
+        if currentWordIndex >= words.count {
+            currentWordIndex = 0
+        }
+        
+        currentWord = words[currentWordIndex].text
     }
     
     func nextPlayer() {

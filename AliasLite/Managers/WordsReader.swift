@@ -7,9 +7,11 @@
 
 import Foundation
 
-class WordsReader {
+final class WordsReader {
     
-    static func getWords() -> [Word] {
+    static let shared = WordsReader()
+    
+    func getWords() -> [Word] {
         
         guard let path = Bundle.main.path(forResource: "Words", ofType: "json") else {
             return []
