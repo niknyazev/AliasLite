@@ -105,16 +105,18 @@ class CurrentSessionViewController: UIViewController {
     private lazy var droppedLabel: UILabel = {
         let label = UILabel()
         label.text = "dropped: 0"
-        label.font = .systemFont(ofSize: 15)
+        label.font = .systemFont(ofSize: 17)
         label.textColor = .black
+        label.textAlignment = .center
         return label
     }()
     
     private lazy var guessedLabel: UILabel = {
         let label = UILabel()
         label.text = "guessed: 3"
-        label.font = .systemFont(ofSize: 15)
+        label.font = .systemFont(ofSize: 17)
         label.textColor = .black
+        label.textAlignment = .center
         return label
     }()
     
@@ -200,7 +202,8 @@ class CurrentSessionViewController: UIViewController {
         view.addSubview(startPauseButton)
         view.addSubview(currentWordLabel)
         view.addSubview(scoreLabel)
-//        view.addSubview(buttonsDescriptionStack)
+        view.addSubview(droppedLabel)
+        view.addSubview(guessedLabel)
               
         // Score label
         
@@ -225,15 +228,24 @@ class CurrentSessionViewController: UIViewController {
         
         // Buttons description
 
-//        buttonsDescriptionStack.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            buttonsDescriptionStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-//            buttonsDescriptionStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            buttonsDescriptionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            buttonsDescriptionStack.heightAnchor.constraint(equalToConstant: 20)
-//        ])
-                
+        droppedLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            droppedLabel.topAnchor.constraint(equalTo: wordsManagingButtonsStack.bottomAnchor, constant: 10),
+            droppedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            droppedLabel.widthAnchor.constraint(equalTo: dropWordButton.widthAnchor, multiplier: 1)
+        ])
+        
+        guessedLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            guessedLabel.topAnchor.constraint(equalTo: wordsManagingButtonsStack.bottomAnchor, constant: 10),
+            guessedLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            guessedLabel.widthAnchor.constraint(equalTo: guessWordButton.widthAnchor, multiplier: 1)
+        ])
+              
+        // Start button
+        
         startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
