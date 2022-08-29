@@ -86,6 +86,40 @@ class CurrentSessionViewController: UIViewController {
         return label
     }()
     
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Score: 10"
+        label.font = .systemFont(ofSize: 25)
+        label.textColor = .red
+        return label
+    }()
+    
+//    private lazy var buttonsDescriptionStack: UIStackView = {
+//        let result = UIStackView(arrangedSubviews: [droppedLabel, guessedLabel])
+//        result.distribution = .fillEqually
+//        result.alignment = .center
+////        result.spacing = 10
+//        return result
+//    }()
+    
+    private lazy var droppedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "dropped: 0"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .black
+        return label
+    }()
+    
+    private lazy var guessedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "guessed: 3"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .black
+        return label
+    }()
+    
+    
+    
 //    private lazy var playerNameLabel: UILabel = {
 //        let label = UILabel()
 //        label.text = "User name"
@@ -112,7 +146,7 @@ class CurrentSessionViewController: UIViewController {
     }
     
     private func getWords() {
-        words = WordsReader.getWords().shuffled()
+        words = WordsReader.shared.getWords().shuffled()
     }
     
     private func fillViewWithData() {
@@ -165,28 +199,40 @@ class CurrentSessionViewController: UIViewController {
         view.addSubview(wordsManagingButtonsStack)
         view.addSubview(startPauseButton)
         view.addSubview(currentWordLabel)
-//        view.addSubview(playerNameLabel)
+        view.addSubview(scoreLabel)
+//        view.addSubview(buttonsDescriptionStack)
               
-        // Players name
+        // Score label
         
-//        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            playerNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-//            playerNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            playerNameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
-//        ])
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            scoreLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scoreLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
+        ])
         
         // Working with word buttons
 
         wordsManagingButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            wordsManagingButtonsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             wordsManagingButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            wordsManagingButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             wordsManagingButtonsStack.heightAnchor.constraint(equalToConstant: 110)
         ])
+        
+        // Buttons description
+
+//        buttonsDescriptionStack.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            buttonsDescriptionStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+//            buttonsDescriptionStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            buttonsDescriptionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            buttonsDescriptionStack.heightAnchor.constraint(equalToConstant: 20)
+//        ])
                 
         startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
