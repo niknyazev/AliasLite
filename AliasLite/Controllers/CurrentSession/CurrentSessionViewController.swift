@@ -154,6 +154,8 @@ class CurrentSessionViewController: UIViewController {
     private func fillViewWithData() {
         title = viewModel.playerName
         currentWordLabel.text = viewModel.currentWord
+        droppedLabel.text = viewModel.wordsDropped
+        guessedLabel.text = viewModel.wordsGuessed
     }
     
     private func setupElements() {

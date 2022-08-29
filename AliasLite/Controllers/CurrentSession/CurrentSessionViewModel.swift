@@ -10,8 +10,9 @@ import Foundation
 protocol CurrentSessionViewModelProtocol {
     var playerName: String { get }
     var currentWord: String { get }
-    var wordsDropped: Int { get }
-    var wordsGuessed: Int { get }
+    var wordsDropped: String { get }
+    var wordsGuessed: String { get }
+    
     func nextWord()
     func nextPlayer()
 }
@@ -20,8 +21,8 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     var playerName = "Test player"
     var currentWord = "Press start"
-    var wordsDropped = 10
-    var wordsGuessed = 10
+    var wordsDropped = "dropped: 0"
+    var wordsGuessed = "guessed: 10"
     
     private let players = PlayersManager.shared.getTopPlayers()
     private var currentPlayerIndex = 0
