@@ -158,6 +158,8 @@ extension GameSettingsViewController {
         
         if section == 0 {
             return viewModel.playersCount
+        } else if section == 1 {
+            return 2
         } else {
             return 1
         }

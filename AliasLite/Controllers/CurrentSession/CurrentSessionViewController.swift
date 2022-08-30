@@ -135,16 +135,6 @@ class CurrentSessionViewController: UIViewController {
         view.addSubview(scoreLabel)
         view.addSubview(droppedLabel)
         view.addSubview(guessedLabel)
-              
-        // Score label
-        
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            scoreLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scoreLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30)
-        ])
         
         // Working with word buttons
 
@@ -175,26 +165,27 @@ class CurrentSessionViewController: UIViewController {
             guessedLabel.widthAnchor.constraint(equalTo: guessWordButton.widthAnchor, multiplier: 1)
         ])
               
+        // Score label
+        
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            scoreLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -30),
+            scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 120)
+        ])
+                
         // Start button
         
         startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            startPauseButton.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -30),
+            startPauseButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startPauseButton.widthAnchor.constraint(equalToConstant: 120),
             startPauseButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-//        // Timer
-//
-//        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            timerLabel.bottomAnchor.constraint(equalTo: wordsManagingButtonsStack.topAnchor, constant: -40)
-//        ])
-        
+                        
         // Current word
         
         currentWordLabel.translatesAutoresizingMaskIntoConstraints = false
