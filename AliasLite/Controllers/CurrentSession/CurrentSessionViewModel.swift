@@ -12,6 +12,7 @@ protocol CurrentSessionViewModelProtocol {
     var currentWord: String { get }
     var wordsDropped: String { get }
     var wordsGuessed: String { get }
+    var viewModelDidChange: (() -> Void)? { get set }
     
     func nextWord()
     func nextPlayer()
@@ -23,6 +24,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var currentWord = "Press start"
     var wordsDropped = "dropped: 0"
     var wordsGuessed = "guessed: 10"
+    var viewModelDidChange: (() -> Void)?
     
     private let players = PlayersManager.shared.getTopPlayers()
     private var currentPlayerIndex = 0

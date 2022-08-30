@@ -18,7 +18,7 @@ class CurrentSessionViewController: UIViewController {
     }
     private var words: [Word] = []
     private var currentWordIndex = 0
-    private let viewModel: CurrentSessionViewModelProtocol = CurrentSessionViewModel()
+    private var viewModel: CurrentSessionViewModelProtocol!
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
         let result = UIStackView(arrangedSubviews: [dropWordButton, guessWordButton])
@@ -140,11 +140,17 @@ class CurrentSessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewModel()
         addConstraints()
         getWords()
         setupElements()
         // TODO: refactoring
         fillViewWithData()
+    }
+    
+    private func setupViewModel() {
+        viewModel = CurrentSessionViewModel()
+        viewModel.viewModelDidChange = fillViewWithData
     }
     
     private func getWords() {
