@@ -10,11 +10,12 @@ import Foundation
 protocol CurrentSessionViewModelProtocol {
     var playerName: String { get }
     var currentWord: String { get }
-    var wordsDropped: String { get }
-    var wordsGuessed: String { get }
+    var wordsDroppedTitle: String { get }
+    var wordsGuessedTitle: String { get }
     var viewModelDidChange: (() -> Void)? { get set }
     
-    func nextWord()
+    func wordGuessed()
+    func wordDropped()
     func nextPlayer()
 }
 
@@ -22,8 +23,12 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     var playerName = "Test player"
     var currentWord = "Press start"
-    var wordsDropped = "dropped: 0"
-    var wordsGuessed = "guessed: 10"
+    var wordsDroppedTitle: String {
+        "dropped: \(wordsDropped)"
+    }
+    var wordsGuessedTitle: String {
+        "guessed: \(wordsGuessed)"
+    }
     var viewModelDidChange: (() -> Void)?
     
     private let players = PlayersManager.shared.getTopPlayers()
@@ -31,16 +36,21 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     private let words = WordsReader.shared.getWords().shuffled()
     private var currentWordIndex = 0
     private var currentPlayer: Player?
+    private var wordsDropped = 0
+    private var wordsGuessed = 0
     
-    func nextWord() {
-        
-        currentWordIndex += 1
-        
-        if currentWordIndex >= words.count {
-            currentWordIndex = 0
-        }
-        
-        currentWord = words[currentWordIndex].text
+    // MARK: - Public methods
+    
+    func wordGuessed() {
+        wordsGuessed += 1
+        nextWord()
+        viewModelDidChange?()
+    }
+    
+    func wordDropped() {
+        wordsDropped += 1
+        nextWord()
+        viewModelDidChange?()
     }
     
     func nextPlayer() {
@@ -52,5 +62,18 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         }
 
         currentPlayer = players[currentPlayerIndex]
+    }
+    
+    // MARK: - Private methods
+    
+    private func nextWord() {
+        
+        currentWordIndex += 1
+        
+        if currentWordIndex >= words.count {
+            currentWordIndex = 0
+        }
+        
+        currentWord = words[currentWordIndex].text
     }
 }

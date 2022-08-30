@@ -160,8 +160,8 @@ class CurrentSessionViewController: UIViewController {
     private func fillViewWithData() {
         title = viewModel.playerName
         currentWordLabel.text = viewModel.currentWord
-        droppedLabel.text = viewModel.wordsDropped
-        guessedLabel.text = viewModel.wordsGuessed
+        droppedLabel.text = viewModel.wordsDroppedTitle
+        guessedLabel.text = viewModel.wordsGuessedTitle
     }
     
     private func setupElements() {
@@ -283,14 +283,7 @@ class CurrentSessionViewController: UIViewController {
     }
     
     @objc private func nextWordPressed() {
-        
-        if currentWordIndex >= words.count {
-            currentWordIndex = 0
-            return
-        }
-        
-        currentWordLabel.text = words[currentWordIndex].text
-        currentWordIndex += 1
+        viewModel.wordGuessed()
     }
     
     @objc private func startPausePressed() {
