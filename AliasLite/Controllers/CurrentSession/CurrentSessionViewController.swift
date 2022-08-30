@@ -16,8 +16,6 @@ class CurrentSessionViewController: UIViewController {
             startPauseButton.setTitle("\(time)", for: .normal)
         }
     }
-    private var words: [Word] = []
-    private var currentWordIndex = 0
     private var viewModel: CurrentSessionViewModelProtocol!
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
@@ -34,15 +32,9 @@ class CurrentSessionViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(nextWordPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(wordGuessPressed), for: .touchUpInside)
         
-        // Shadow
-        
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 3
-        button.layer.cornerRadius = 15
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.layer.shadowOpacity = 0.7
+        button.addShadow()
         
         return button
     }()
@@ -54,19 +46,13 @@ class CurrentSessionViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(wordDropPressed), for: .touchUpInside)
         
-        // Shadow
+        button.addShadow()
         
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 3
-        button.layer.cornerRadius = 15
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.layer.shadowOpacity = 0.7
-        
-//        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
-    
+        
     private lazy var startPauseButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.lightGray
@@ -93,15 +79,7 @@ class CurrentSessionViewController: UIViewController {
         label.textColor = .red
         return label
     }()
-    
-//    private lazy var buttonsDescriptionStack: UIStackView = {
-//        let result = UIStackView(arrangedSubviews: [droppedLabel, guessedLabel])
-//        result.distribution = .fillEqually
-//        result.alignment = .center
-////        result.spacing = 10
-//        return result
-//    }()
-    
+        
     private lazy var droppedLabel: UILabel = {
         let label = UILabel()
         label.text = "dropped: 0"
@@ -119,30 +97,11 @@ class CurrentSessionViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
-    
-    
-//    private lazy var playerNameLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "User name"
-//        label.font = .systemFont(ofSize: 20)
-//        label.textColor = .black
-//        return label
-//    }()
-    
-//    private lazy var timerLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "\(time)"
-//        label.font = .systemFont(ofSize: 30)
-//        label.textColor = .blue
-//        return label
-//    }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModel()
         addConstraints()
-        getWords()
         setupElements()
         // TODO: refactoring
         fillViewWithData()
@@ -151,10 +110,6 @@ class CurrentSessionViewController: UIViewController {
     private func setupViewModel() {
         viewModel = CurrentSessionViewModel()
         viewModel.viewModelDidChange = fillViewWithData
-    }
-    
-    private func getWords() {
-        words = WordsReader.shared.getWords().shuffled()
     }
     
     private func fillViewWithData() {
@@ -172,6 +127,10 @@ class CurrentSessionViewController: UIViewController {
             action: #selector(menuPressed)
         )
         view.backgroundColor = .white
+    }
+    
+    @objc private func wordDropPressed() {
+        
     }
     
     @objc private func menuPressed() {
@@ -282,7 +241,7 @@ class CurrentSessionViewController: UIViewController {
         ])
     }
     
-    @objc private func nextWordPressed() {
+    @objc private func wordGuessPressed() {
         viewModel.wordGuessed()
     }
     
