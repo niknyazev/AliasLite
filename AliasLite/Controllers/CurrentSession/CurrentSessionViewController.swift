@@ -82,7 +82,6 @@ class CurrentSessionViewController: UIViewController {
         
     private lazy var droppedLabel: UILabel = {
         let label = UILabel()
-        label.text = "dropped: 0"
         label.font = .systemFont(ofSize: 17)
         label.textColor = .black
         label.textAlignment = .center
@@ -91,7 +90,6 @@ class CurrentSessionViewController: UIViewController {
     
     private lazy var guessedLabel: UILabel = {
         let label = UILabel()
-        label.text = "guessed: 3"
         label.font = .systemFont(ofSize: 17)
         label.textColor = .black
         label.textAlignment = .center
@@ -128,41 +126,7 @@ class CurrentSessionViewController: UIViewController {
         )
         view.backgroundColor = .white
     }
-    
-    @objc private func wordDropPressed() {
-        
-    }
-    
-    @objc private func menuPressed() {
-        
-        let alertController = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-
-        let logAction = UIAlertAction(title: "Log", style: .default) { _ in
-            print("Log")
-        }
-        
-        let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
-            print("Log")
-        }
-
-        let endSession = UIAlertAction(title: "End session", style: .destructive) { _ in
-            print("Log")
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-
-        alertController.addAction(logAction)
-        alertController.addAction(gameSettings)
-        alertController.addAction(endSession)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-    
+       
     private func addConstraints() {
         
         view.addSubview(wordsManagingButtonsStack)
@@ -241,10 +205,46 @@ class CurrentSessionViewController: UIViewController {
         ])
     }
     
+    // MARK: - Buttons handlers
+    
+    @objc private func wordDropPressed() {
+        viewModel.wordDropped()
+    }
+    
     @objc private func wordGuessPressed() {
         viewModel.wordGuessed()
     }
     
+    @objc private func menuPressed() {
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let logAction = UIAlertAction(title: "Log", style: .default) { _ in
+            print("Log")
+        }
+        
+        let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
+            print("Log")
+        }
+
+        let endSession = UIAlertAction(title: "End session", style: .destructive) { _ in
+            print("Log")
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(logAction)
+        alertController.addAction(gameSettings)
+        alertController.addAction(endSession)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+ 
     @objc private func startPausePressed() {
                 
         if timer.isValid {
