@@ -11,13 +11,19 @@ protocol GameSettingsViewModelProtocol {
     // TODO: Substitute Player with view model
     
     var playersCount: Int { get }
+    var sessionSettings: [(settingName: String, settingValue: String)] { get }
     
     func getPlayerName(index: Int) -> String
     func savePlayer(name: String)
 }
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
-  
+    
+    var sessionSettings = [
+        (settingName: "Round duration:", settingValue: "60"),
+        (settingName: "Total score:", settingValue: "100")
+    ]
+    
     private let playersManager = PlayersManager.shared
     private var players: [Player] = []
     

@@ -195,8 +195,8 @@ extension GameSettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: valueCellID, for: indexPath)
             var content = cell.defaultContentConfiguration()
             
-            content.text = "Session time"
-            content.secondaryText = "60"
+            content.text = viewModel.sessionSettings[indexPath.row].settingName
+            content.secondaryText = viewModel.sessionSettings[indexPath.row].settingValue
             
             cell.contentConfiguration = content
             
