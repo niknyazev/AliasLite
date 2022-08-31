@@ -4,7 +4,12 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="wins" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="WordCore" representedClassName="WordCore" syncable="YES" codeGenerationType="class">
+        <attribute name="level" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" attributeType="String"/>
+    </entity>
     <elements>
         <element name="PlayerCore" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="WordCore" positionX="-54" positionY="9" width="128" height="59"/>
     </elements>
 </model>

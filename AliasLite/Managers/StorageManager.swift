@@ -39,18 +39,21 @@ class StorageManager {
     private init() {}
     
     // MARK: - Public methods
-    
-    // MARK: - Fetching methods
-    
-    func fetchPlayers(completion: (Result<[Player], Error>) -> Void) {
-//        let fetchRequest = Player.fetchRequest()
         
-//        do {
-//            let entities = try viewContext.fetch(fetchRequest)
-//            completion(.success(entities))
-//        } catch let error {
-//            completion(.failure(error))
-//        }
+    func fetchPlayers() -> [PlayerCore] {
+        return [PlayerCore()]
+    }
+    
+    func savePlayer(name: String) {
+        saveContext()
+    }
+    
+    func fetchWord() -> WordCore? {
+        return WordCore()
+    }
+    
+    func saveWord(text: String) {
+        saveContext()
     }
     
     // MARK: - Saving methods
