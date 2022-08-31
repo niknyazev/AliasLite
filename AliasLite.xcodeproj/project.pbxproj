@@ -25,6 +25,7 @@
 		01C8C7D3289C427500DE2BED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D2289C427500DE2BED /* Assets.xcassets */; };
 		01C8C7D6289C427500DE2BED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D4289C427500DE2BED /* LaunchScreen.storyboard */; };
 		01E4BA4428BE116000A7F6A9 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BA4328BE116000A7F6A9 /* Extension + UIButton.swift */; };
+		01E4BA4628BF63A000A7F6A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BA4528BF63A000A7F6A9 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		01C8C7D5289C427500DE2BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01C8C7D7289C427500DE2BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01E4BA4328BE116000A7F6A9 /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
+		01E4BA4528BF63A000A7F6A9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				0137794428A137E800325362 /* JSONWorker.swift */,
 				0137794E28A3F29F00325362 /* PlayersManager.swift */,
 				0137794C28A2569A00325362 /* WordsReader.swift */,
+				01E4BA4528BF63A000A7F6A9 /* StorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				0189551528B3D1200043E4F6 /* CurrentSessionViewModel.swift in Sources */,
 				0137795128A3F2E400325362 /* Player.swift in Sources */,
 				0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */,
+				01E4BA4628BF63A000A7F6A9 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
