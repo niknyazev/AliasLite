@@ -44,16 +44,28 @@ class StorageManager {
         return [PlayerCore()]
     }
     
-    func savePlayer(name: String) {
+    func savePlayer(name: String) -> PlayerCore {
+        
+        let player = PlayerCore(context: viewContext)
+        player.name = name
+        
         saveContext()
+        
+        return player
     }
     
     func fetchWord() -> WordCore? {
         return WordCore()
     }
     
-    func saveWord(text: String) {
+    func saveWord(text: String) -> WordCore {
+        
+        let word = WordCore(context: viewContext)
+        word.text = text
+        
         saveContext()
+        
+        return word
     }
     
     // MARK: - Saving methods
