@@ -11,7 +11,7 @@ class MainScreenViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let viewModel: MainScreenViewModelProtocol = MainScreenViewModel()
+    private var viewModel: MainScreenViewModelProtocol!
     
     private lazy var startNewGame: UIButton = {
         let button = UIButton()
@@ -28,7 +28,7 @@ class MainScreenViewController: UIViewController {
         let result = UITableView()
         result.dataSource = self
         result.delegate = self
-        result.register(PlayerCell.self, forCellReuseIdentifier: cellID)
+        result.register(PlayerCell.cellID, forCellReuseIdentifier: cellID)
         return result
     }()
     
@@ -39,8 +39,6 @@ class MainScreenViewController: UIViewController {
         label.textColor = .black
         return label
     }()
-
-    let cellID = "playerData"
     
     // MARK: - ViewController life circle
     
@@ -51,8 +49,7 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: remove
-        view.backgroundColor = .white
+        viewModel = MainScreenViewModel()
         addConstraints()
         setupElements()
     }
@@ -60,7 +57,8 @@ class MainScreenViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupElements() {
-        title = "Alias"
+        title = viewModel.viewTitle
+        view.backgroundColor = .white
     }
     
     private func addConstraints() {
@@ -115,7 +113,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.cellID, for: indexPath)
         let player = viewModel.getPlayerData(for: indexPath.row)
         var content = cell.defaultContentConfiguration()
         content.text = player.name
@@ -127,6 +125,8 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
 
 // TODO: Move to another file
 class PlayerCell: UITableViewCell {
+    
+    static let cellID = "playerData"
    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
