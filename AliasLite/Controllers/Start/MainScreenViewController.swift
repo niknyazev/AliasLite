@@ -28,7 +28,7 @@ class MainScreenViewController: UIViewController {
         let result = UITableView()
         result.dataSource = self
         result.delegate = self
-        result.register(PlayerCell.cellID, forCellReuseIdentifier: cellID)
+        result.register(PlayerCell.self, forCellReuseIdentifier: PlayerCell.cellID)
         return result
     }()
     
