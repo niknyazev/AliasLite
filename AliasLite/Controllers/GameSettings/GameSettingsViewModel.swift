@@ -32,7 +32,7 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
     }
     
     func getPlayerName(index: Int) -> String {
-        players[index].name
+        players[index].name ?? ""
     }
     
     func savePlayer(name: String) {

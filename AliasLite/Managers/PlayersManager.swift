@@ -14,16 +14,17 @@ final class PlayersManager {
     private init() { }
     
     private var players = [
-        Player(name: "Nick", score: 10),
-        Player(name: "Maya", score: 20),
-        Player(name: "Jack", score: 5)
+        Player(),
+        Player(),
+        Player()
     ]
     
     func getTopPlayers() -> [Player] {
-        players
+        // TODO: need refactoring
+        StorageManager.shared.fetchPlayers()
     }
     
     func savePlayer(name: String) {
-        players.append(Player(name: name, score: 0))
+        players.append(Player())
     }
 }

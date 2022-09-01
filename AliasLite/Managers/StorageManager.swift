@@ -40,13 +40,20 @@ class StorageManager {
     
     // MARK: - Public methods
         
-    func fetchPlayers() -> [PlayerCore] {
-        return [PlayerCore()]
+    func fetchPlayers() -> [Player] {
+        
+        let fetchRequest = Player.fetchRequest()
+        
+        do {
+            return try viewContext.fetch(fetchRequest)
+        } catch {
+            return []
+        }
     }
     
-    func savePlayer(name: String) -> PlayerCore {
+    func savePlayer(name: String) -> Player {
         
-        let player = PlayerCore(context: viewContext)
+        let player = Player(context: viewContext)
         player.name = name
         
         saveContext()

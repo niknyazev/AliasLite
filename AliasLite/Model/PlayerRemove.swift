@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Player {
+struct PlayerRemove {
     let name: String
     let score: Int
 }

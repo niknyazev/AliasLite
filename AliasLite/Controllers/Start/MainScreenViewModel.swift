@@ -12,19 +12,21 @@ protocol PlayerDataViewModelProtocol {
     var score: Int { get }
 }
 
-class PlayerData: PlayerDataViewModelProtocol {
+class PlayerDataViewModel: PlayerDataViewModelProtocol {
     
     var name: String
+    // Rename to wins
     var score: Int
     
     init(player: Player) {
-        name = player.name
-        score = player.score
+        name = player.name ?? ""
+        score = Int(player.wins)
     }
 }
 
 protocol MainScreenViewModelProtocol {
     var playersCount: Int { get }
+    var viewTitle: String { get }
     func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol
 }
 
@@ -34,6 +36,8 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
         topPlayers.count
     }
     
+    let viewTitle = "Alias lite"
+    
     private let topPlayers: [Player]
     
     init() {
@@ -41,6 +45,6 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     }
 
     func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol {
-        PlayerData(player: topPlayers[index])
+        PlayerDataViewModel(player: topPlayers[index])
     }
 }
