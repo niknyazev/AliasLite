@@ -60,9 +60,8 @@ class GameSettingsViewController: UITableViewController {
         }
 
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let newValue = alertController.textFields?.first?.text else { return }
-            self.viewModel.savePlayer(name: newValue)
-//            self.playersTable.reloadData()
+            guard let name = alertController.textFields?.first?.text else { return }
+            StorageManager.shared.savePlayer(name: name)
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)

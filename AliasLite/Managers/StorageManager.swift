@@ -23,7 +23,7 @@ class StorageManager {
     static let shared = StorageManager()
     
     private let persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Flashcards")
+        let container = NSPersistentContainer(name: "AliasLite")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
