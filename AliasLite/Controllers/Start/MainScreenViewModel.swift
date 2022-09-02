@@ -7,23 +7,6 @@
 
 import Foundation
 
-protocol PlayerDataViewModelProtocol {
-    var name: String { get }
-    var score: Int { get }
-}
-
-class PlayerDataViewModel: PlayerDataViewModelProtocol {
-    
-    var name: String
-    // Rename to wins
-    var score: Int
-    
-    init(player: Player) {
-        name = player.name ?? ""
-        score = Int(player.wins)
-    }
-}
-
 protocol MainScreenViewModelProtocol {
     var playersCount: Int { get }
     var viewTitle: String { get }
