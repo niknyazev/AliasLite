@@ -51,6 +51,7 @@ class StorageManager {
         }
     }
     
+    @discardableResult
     func savePlayer(name: String) -> Player {
         
         let player = Player(context: viewContext)

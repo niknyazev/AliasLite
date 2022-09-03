@@ -13,7 +13,7 @@ class GameSettingsViewController: UITableViewController {
     let buttonCellID = "button"
     let valueCellID = "value"
     
-    private let viewModel: GameSettingsViewModelProtocol = GameSettingsViewModel()
+    private var viewModel: GameSettingsViewModelProtocol!
         
     private lazy var tableDescriptionLabel: UILabel = {
         let label = UILabel()
@@ -22,10 +22,18 @@ class GameSettingsViewController: UITableViewController {
         label.textColor = .black
         return label
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElements()
+        setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        viewModel = GameSettingsViewModel()
+        viewModel.viewDidChange = {
+            self.tableView.reloadData()
+        }
     }
     
     private func setupElements() {
@@ -61,7 +69,7 @@ class GameSettingsViewController: UITableViewController {
 
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let name = alertController.textFields?.first?.text else { return }
-            StorageManager.shared.savePlayer(name: name)
+            self.viewModel.savePlayer(name: name)
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)

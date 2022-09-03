@@ -12,6 +12,7 @@ protocol GameSettingsViewModelProtocol {
     
     var playersCount: Int { get }
     var sessionSettings: [(settingName: String, settingValue: String)] { get }
+    var viewDidChange: (() -> Void)? { get set }
     
     func getPlayerName(index: Int) -> String
     func savePlayer(name: String)
@@ -19,26 +20,26 @@ protocol GameSettingsViewModelProtocol {
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
     
+    var viewDidChange: (() -> Void)?
     var sessionSettings = [
         (settingName: "Round duration:", settingValue: "60"),
         (settingName: "Total score:", settingValue: "100")
     ]
-    
-    private let playersManager = PlayersManager.shared
-    private var players: [Player] = []
-    
     var playersCount: Int {
         players.count
     }
+
+    private let playersManager = PlayersManager.shared
+    private var players: [Player] = []
     
     func getPlayerName(index: Int) -> String {
         players[index].name ?? ""
     }
     
     func savePlayer(name: String) {
-        playersManager.savePlayer(name: name)
-        // TODO: Need refactoring
+        StorageManager.shared.savePlayer(name: name)
         getPlayers()
+        viewDidChange?()
     }
     
     init() {
