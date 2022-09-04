@@ -272,7 +272,6 @@ class CurrentSessionViewController: UIViewController {
 
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             self.viewModel.nextPlayer()
-            self.fillViewWithData()
         }
 
         alertController.addAction(okAction)

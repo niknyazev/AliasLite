@@ -31,7 +31,9 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var wordsGuessedTitle: String {
         "guessed: \(wordsGuessed)"
     }
-    var playerName = "Test player"
+    var playerName: String {
+        currentPlayer?.name ?? ""
+    }
     var currentWord = "Press start"
     var viewModelDidChange: (() -> Void)?
     
@@ -69,6 +71,12 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         }
 
         currentPlayer = players[currentPlayerIndex]
+        nextWord()
+        viewModelDidChange?()
+    }
+    
+    init() {
+        currentPlayer = players.first
     }
     
     // MARK: - Private methods
