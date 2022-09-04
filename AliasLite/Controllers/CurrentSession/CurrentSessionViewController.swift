@@ -74,7 +74,6 @@ class CurrentSessionViewController: UIViewController {
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "Score: 10"
         label.font = .systemFont(ofSize: 25)
         label.textColor = .red
         return label
@@ -115,6 +114,7 @@ class CurrentSessionViewController: UIViewController {
         currentWordLabel.text = viewModel.currentWord
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
+        scoreLabel.text = viewModel.scoresTitle
     }
     
     private func setupElements() {

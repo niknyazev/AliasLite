@@ -13,6 +13,7 @@ protocol CurrentSessionViewModelProtocol {
     var wordsDroppedTitle: String { get }
     var wordsGuessedTitle: String { get }
     var viewModelDidChange: (() -> Void)? { get set }
+    var scoresTitle: String { get }
     
     func wordGuessed()
     func wordDropped()
@@ -20,15 +21,18 @@ protocol CurrentSessionViewModelProtocol {
 }
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
-    
-    var playerName = "Test player"
-    var currentWord = "Press start"
+        
+    var scoresTitle: String {
+        "Scores: \(scores)"
+    }
     var wordsDroppedTitle: String {
         "dropped: \(wordsDropped)"
     }
     var wordsGuessedTitle: String {
         "guessed: \(wordsGuessed)"
     }
+    var playerName = "Test player"
+    var currentWord = "Press start"
     var viewModelDidChange: (() -> Void)?
     
     private let players = PlayersManager.shared.getTopPlayers()
@@ -38,6 +42,9 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     private var currentPlayer: Player?
     private var wordsDropped = 0
     private var wordsGuessed = 0
+    private var scores: Int {
+        (wordsGuessed - wordsDropped) < 0 ? 0 : (wordsGuessed - wordsDropped)
+    }
     
     // MARK: - Public methods
     
