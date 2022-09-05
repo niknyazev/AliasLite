@@ -62,6 +62,14 @@ class StorageManager {
         return player
     }
     
+    func putToLog(player: Player, word: Word, guessed: Bool) {
+        
+    }
+    
+    func saveGameSettings() {
+        
+    }
+    
     func fetchWord() -> WordCore? {
         return WordCore()
     }

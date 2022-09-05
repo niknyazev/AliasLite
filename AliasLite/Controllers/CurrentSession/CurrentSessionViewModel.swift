@@ -47,16 +47,39 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     private var scores: Int {
         (wordsGuessed - wordsDropped) < 0 ? 0 : (wordsGuessed - wordsDropped)
     }
+    private let storageManager = StorageManager.shared
     
     // MARK: - Public methods
     
     func wordGuessed() {
+        
+        guard let currentPlayer = currentPlayer else {
+            return
+        }
+        
+        storageManager.putToLog(
+            player: currentPlayer,
+            word: words[currentWordIndex],
+            guessed: true
+        )
+        
         wordsGuessed += 1
         nextWord()
         viewModelDidChange?()
     }
     
     func wordDropped() {
+        
+        guard let currentPlayer = currentPlayer else {
+            return
+        }
+        
+        storageManager.putToLog(
+            player: currentPlayer,
+            word: words[currentWordIndex],
+            guessed: false
+        )
+
         wordsDropped += 1
         nextWord()
         viewModelDidChange?()
