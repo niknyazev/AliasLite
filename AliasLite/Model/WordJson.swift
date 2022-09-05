@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Word: Decodable {
+struct WordJson: Decodable {
     let text: String
     let type: String
 }

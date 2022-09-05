@@ -39,7 +39,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     private let players = PlayersManager.shared.getTopPlayers()
     private var currentPlayerIndex = 0
-    private let words = WordsReader.shared.getWords().shuffled()
+    private let words = StorageManager.shared.fetchWords()
     private var currentWordIndex = 0
     private var currentPlayer: Player?
     private var wordsDropped = 0

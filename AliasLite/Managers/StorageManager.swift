@@ -70,18 +70,25 @@ class StorageManager {
         
     }
     
-    func fetchWord() -> WordCore? {
-        return WordCore()
+    func fetchWords() -> [Word] {
+        return [Word()]
     }
     
-    func saveWord(text: String) -> WordCore {
+    func importWords() {
         
-        let word = WordCore(context: viewContext)
+        let words = WordsReader.shared.getWords()
+        
+        for word in words {
+            saveWord(text: word.text ?? "")
+        }
+    }
+    
+    func saveWord(text: String) {
+        
+        let word = Word(context: viewContext)
         word.text = text
         
         saveContext()
-        
-        return word
     }
     
     // MARK: - Saving methods

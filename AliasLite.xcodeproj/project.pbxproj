@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0137794228A135F500325362 /* Words.json in Resources */ = {isa = PBXBuildFile; fileRef = 0137794128A135F500325362 /* Words.json */; };
 		0137794528A137E800325362 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794428A137E800325362 /* JSONWorker.swift */; };
-		0137794B28A1506F00325362 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794A28A1506F00325362 /* Word.swift */; };
+		0137794B28A1506F00325362 /* WordJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794A28A1506F00325362 /* WordJson.swift */; };
 		0137794D28A2569A00325362 /* WordsReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794C28A2569A00325362 /* WordsReader.swift */; };
 		0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794E28A3F29F00325362 /* PlayersManager.swift */; };
 		0137795128A3F2E400325362 /* PlayerRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795028A3F2E400325362 /* PlayerRemove.swift */; };
@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		0137794128A135F500325362 /* Words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Words.json; sourceTree = "<group>"; };
 		0137794428A137E800325362 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
-		0137794A28A1506F00325362 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		0137794A28A1506F00325362 /* WordJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordJson.swift; sourceTree = "<group>"; };
 		0137794C28A2569A00325362 /* WordsReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReader.swift; sourceTree = "<group>"; };
 		0137794E28A3F29F00325362 /* PlayersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersManager.swift; sourceTree = "<group>"; };
 		0137795028A3F2E400325362 /* PlayerRemove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRemove.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		0137794928A1505D00325362 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0137794A28A1506F00325362 /* Word.swift */,
+				0137794A28A1506F00325362 /* WordJson.swift */,
 				0137795028A3F2E400325362 /* PlayerRemove.swift */,
 			);
 			path = Model;
@@ -244,7 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0137794B28A1506F00325362 /* Word.swift in Sources */,
+				0137794B28A1506F00325362 /* WordJson.swift in Sources */,
 				01E4BA4428BE116000A7F6A9 /* Extension + UIButton.swift in Sources */,
 				01C8C7CB289C427100DE2BED /* MainScreenViewController.swift in Sources */,
 				0137795728A41A0800325362 /* CurrentSessionViewController.swift in Sources */,

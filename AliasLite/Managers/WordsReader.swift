@@ -11,7 +11,7 @@ final class WordsReader {
     
     static let shared = WordsReader()
     
-    func getWords() -> [Word] {
+    func getWords() -> [WordJson] {
         
         guard let path = Bundle.main.path(forResource: "Words", ofType: "json") else {
             return []
@@ -23,7 +23,7 @@ final class WordsReader {
             return []
         }
         
-        let words = JSONWorker.shared.decodeJSON(type: [Word].self, from: data)
+        let words = JSONWorker.shared.decodeJSON(type: [WordJson].self, from: data)
         
         if let result = words {
             return result
