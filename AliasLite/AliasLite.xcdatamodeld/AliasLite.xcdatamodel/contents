@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GameLog" representedClassName="GameLog" syncable="YES" codeGenerationType="class">
+        <attribute name="gussed" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WordCore"/>
+    </entity>
+    <entity name="LastGameData" representedClassName="LastGameData" syncable="YES" codeGenerationType="class">
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="scores" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
+    </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -11,5 +21,7 @@
     <elements>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="WordCore" positionX="-54" positionY="9" width="128" height="59"/>
+        <element name="LastGameData" positionX="-54" positionY="9" width="128" height="74"/>
+        <element name="GameLog" positionX="-54" positionY="27" width="128" height="74"/>
     </elements>
 </model>
