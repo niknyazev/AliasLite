@@ -112,6 +112,6 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
             currentWordIndex = 0
         }
         
-        currentWord = words[currentWordIndex].text
+        currentWord = words[currentWordIndex].text ?? ""
     }
 }

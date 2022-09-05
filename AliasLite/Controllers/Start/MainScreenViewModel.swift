@@ -14,6 +14,8 @@ protocol MainScreenViewModelProtocol {
 }
 
 class MainScreenViewModel: MainScreenViewModelProtocol {
+    
+    private let storageManager = StorageManager.shared
         
     var playersCount: Int {
         topPlayers.count
@@ -25,6 +27,10 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     
     init() {
         topPlayers = PlayersManager.shared.getTopPlayers()
+        
+        if storageManager.fetchWords().count == 0 {
+            storageManager.importWords()
+        }
     }
 
     func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol {
