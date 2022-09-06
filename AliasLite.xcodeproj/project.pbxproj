@@ -24,6 +24,8 @@
 		01C8C7D1289C427100DE2BED /* AliasLite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C7CF289C427100DE2BED /* AliasLite.xcdatamodeld */; };
 		01C8C7D3289C427500DE2BED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D2289C427500DE2BED /* Assets.xcassets */; };
 		01C8C7D6289C427500DE2BED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C7D4289C427500DE2BED /* LaunchScreen.storyboard */; };
+		01D0909628C793F10079CDDC /* GameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0909528C793F10079CDDC /* GameLogViewController.swift */; };
+		01D0909828C7940F0079CDDC /* GameLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0909728C7940F0079CDDC /* GameLogViewModel.swift */; };
 		01E4BA4428BE116000A7F6A9 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BA4328BE116000A7F6A9 /* Extension + UIButton.swift */; };
 		01E4BA4628BF63A000A7F6A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BA4528BF63A000A7F6A9 /* StorageManager.swift */; };
 		01E4BA4828C296A500A7F6A9 /* PlayerDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BA4728C296A500A7F6A9 /* PlayerDataViewModel.swift */; };
@@ -49,6 +51,8 @@
 		01C8C7D2289C427500DE2BED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C8C7D5289C427500DE2BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01C8C7D7289C427500DE2BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01D0909528C793F10079CDDC /* GameLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogViewController.swift; sourceTree = "<group>"; };
+		01D0909728C7940F0079CDDC /* GameLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogViewModel.swift; sourceTree = "<group>"; };
 		01E4BA4328BE116000A7F6A9 /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 		01E4BA4528BF63A000A7F6A9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		01E4BA4728C296A500A7F6A9 /* PlayerDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDataViewModel.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		0137794628A13A6D00325362 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01D0909428C793C60079CDDC /* GameLog */,
 				01AFF4E628A7C380001C25FB /* Start */,
 				01AFF4E728A7C388001C25FB /* GameSettings */,
 				01AFF4E828A7C393001C25FB /* CurrentSession */,
@@ -163,6 +168,15 @@
 				01C8C7CF289C427100DE2BED /* AliasLite.xcdatamodeld */,
 			);
 			path = AliasLite;
+			sourceTree = "<group>";
+		};
+		01D0909428C793C60079CDDC /* GameLog */ = {
+			isa = PBXGroup;
+			children = (
+				01D0909528C793F10079CDDC /* GameLogViewController.swift */,
+				01D0909728C7940F0079CDDC /* GameLogViewModel.swift */,
+			);
+			path = GameLog;
 			sourceTree = "<group>";
 		};
 		01E4BA4228BE10FE00A7F6A9 /* Extensions */ = {
@@ -249,7 +263,9 @@
 				01C8C7CB289C427100DE2BED /* MainScreenViewController.swift in Sources */,
 				0137795728A41A0800325362 /* CurrentSessionViewController.swift in Sources */,
 				0137794528A137E800325362 /* JSONWorker.swift in Sources */,
+				01D0909628C793F10079CDDC /* GameLogViewController.swift in Sources */,
 				01AFF4EC28A7DBEF001C25FB /* GameSettingsViewModel.swift in Sources */,
+				01D0909828C7940F0079CDDC /* GameLogViewModel.swift in Sources */,
 				01C8C7C7289C427100DE2BED /* AppDelegate.swift in Sources */,
 				01AFF4EA28A7D72A001C25FB /* MainScreenViewModel.swift in Sources */,
 				01C8C7D1289C427100DE2BED /* AliasLite.xcdatamodeld in Sources */,
