@@ -63,7 +63,14 @@ class StorageManager {
     }
     
     func putToLog(player: Player, word: Word, guessed: Bool) {
+      
+        let log = GameLog(context: viewContext)
         
+        log.player = player
+        log.word = word
+        log.guessed = guessed
+        
+        saveContext()
     }
     
     func saveGameSettings() {

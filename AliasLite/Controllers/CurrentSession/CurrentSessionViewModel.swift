@@ -89,7 +89,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         guard let currentPlayer = currentPlayer else {
             return
         }
-        
+                
         storageManager.putToLog(
             player: currentPlayer,
             word: words[currentWordIndex],
