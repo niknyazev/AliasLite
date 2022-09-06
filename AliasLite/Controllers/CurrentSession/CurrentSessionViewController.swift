@@ -103,6 +103,9 @@ class CurrentSessionViewController: UIViewController {
         viewModel.viewModelDidChange = fillViewWithData
         viewModel.timerDidChange = { time in
             self.startPauseButton.setTitle("\(time)", for: .normal)
+            if time == 0 {
+                self.showAlertTimeIsOver()
+            }
         }
     }
     

@@ -52,7 +52,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     }
     private let storageManager = StorageManager.shared
     private var timer = Timer()
-    private var time = 0
+    private var time = 5
     
     init() {
         players = storageManager.fetchPlayers()
