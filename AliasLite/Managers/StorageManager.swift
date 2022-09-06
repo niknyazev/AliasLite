@@ -88,6 +88,17 @@ class StorageManager {
         }
     }
     
+    func fetchLogData() -> [GameLog] {
+        
+        let fetchRequest = GameLog.fetchRequest()
+        
+        do {
+            return try viewContext.fetch(fetchRequest)
+        } catch {
+            return []
+        }
+    }
+    
     func importWords() {
         
         let words = WordsReader.shared.getWords()

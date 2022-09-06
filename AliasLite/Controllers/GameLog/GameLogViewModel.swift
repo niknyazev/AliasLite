@@ -12,5 +12,5 @@ protocol GameLogViewModelProtocol {
 }
 
 class GameLogViewModel: GameLogViewModelProtocol {
-    let logData: [GameLog] = []
+    let logData = StorageManager.shared.fetchLogData()
 }
