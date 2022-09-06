@@ -15,6 +15,7 @@ class GameLogViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "logRowData")
         viewModel = GameLogViewModel()
+        title = "Game log"
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -215,7 +215,8 @@ class CurrentSessionViewController: UIViewController {
         )
 
         let logAction = UIAlertAction(title: "Log", style: .default) { _ in
-            self.present(GameLogViewController(), animated: true)
+            let navigationController = UINavigationController(rootViewController: GameLogViewController())
+            self.present(navigationController, animated: true)
         }
         
         let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
