@@ -71,7 +71,14 @@ class StorageManager {
     }
     
     func fetchWords() -> [Word] {
-        return [Word()]
+        
+        let fetchRequest = Word.fetchRequest()
+        
+        do {
+            return try viewContext.fetch(fetchRequest)
+        } catch {
+            return []
+        }
     }
     
     func importWords() {
@@ -89,6 +96,12 @@ class StorageManager {
         word.text = text
         
         saveContext()
+    }
+    
+    func deleteAllWords() {
+        for word in fetchWords() {
+            delete(word)
+        }
     }
     
     // MARK: - Saving methods

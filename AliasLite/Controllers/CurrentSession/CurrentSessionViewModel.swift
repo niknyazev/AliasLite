@@ -37,9 +37,9 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var currentWord = "Press start"
     var viewModelDidChange: (() -> Void)?
     
-    private let players = PlayersManager.shared.getTopPlayers()
+    private let players: [Player]
+    private let words: [Word]
     private var currentPlayerIndex = 0
-    private let words = StorageManager.shared.fetchWords()
     private var currentWordIndex = 0
     private var currentPlayer: Player?
     private var wordsDropped = 0
@@ -48,6 +48,12 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         (wordsGuessed - wordsDropped) < 0 ? 0 : (wordsGuessed - wordsDropped)
     }
     private let storageManager = StorageManager.shared
+    
+    init() {
+        players = storageManager.fetchPlayers()
+        currentPlayer = players.first
+        words = storageManager.fetchWords()
+    }
     
     // MARK: - Public methods
     
@@ -98,9 +104,6 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         viewModelDidChange?()
     }
     
-    init() {
-        currentPlayer = players.first
-    }
     
     // MARK: - Private methods
     
