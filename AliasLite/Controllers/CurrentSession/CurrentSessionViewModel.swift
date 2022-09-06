@@ -13,15 +13,18 @@ protocol CurrentSessionViewModelProtocol {
     var wordsDroppedTitle: String { get }
     var wordsGuessedTitle: String { get }
     var viewModelDidChange: (() -> Void)? { get set }
+    var timerDidChange: ((Int) -> Void)? { get set } // TODO: make boxing
     var scoresTitle: String { get }
     
+    func startRound()
     func wordGuessed()
     func wordDropped()
     func nextPlayer()
 }
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
-        
+    
+    var timerDidChange: ((Int) -> Void)?
     var scoresTitle: String {
         "Scores: \(scores)"
     }
@@ -48,6 +51,8 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         (wordsGuessed - wordsDropped) < 0 ? 0 : (wordsGuessed - wordsDropped)
     }
     private let storageManager = StorageManager.shared
+    private var timer = Timer()
+    private var time = 0
     
     init() {
         players = storageManager.fetchPlayers()
@@ -56,6 +61,11 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     }
     
     // MARK: - Public methods
+    
+    func startRound() {
+        startTimer()
+        currentWord = words.first?.text ?? ""
+    }
     
     func wordGuessed() {
         
@@ -106,6 +116,34 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     
     // MARK: - Private methods
+    
+    private func startTimer() {
+                
+        if timer.isValid {
+            timer.invalidate()
+            timerDidChange?(time)
+            return
+        }
+        
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(timeChanged),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc private func timeChanged() {
+        
+        time -= 1
+        
+        if time == 0 {
+            timer.invalidate()
+        }
+        
+        timerDidChange?(time)
+    }
     
     private func nextWord() {
         

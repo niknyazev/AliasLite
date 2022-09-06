@@ -10,12 +10,6 @@ import CoreData
 
 class CurrentSessionViewController: UIViewController {
 
-    private var timer = Timer()
-    private var time = 5 {
-        didSet {
-            startPauseButton.setTitle("\(time)", for: .normal)
-        }
-    }
     private var viewModel: CurrentSessionViewModelProtocol!
     
     private lazy var wordsManagingButtonsStack: UIStackView = {
@@ -107,6 +101,9 @@ class CurrentSessionViewController: UIViewController {
     private func setupViewModel() {
         viewModel = CurrentSessionViewModel()
         viewModel.viewModelDidChange = fillViewWithData
+        viewModel.timerDidChange = { time in
+            self.startPauseButton.setTitle("\(time)", for: .normal)
+        }
     }
     
     private func fillViewWithData() {
@@ -237,29 +234,7 @@ class CurrentSessionViewController: UIViewController {
     }
  
     @objc private func startPausePressed() {
-                
-        if timer.isValid {
-            timer.invalidate()
-            return
-        }
-        
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(timeChanged),
-            userInfo: nil,
-            repeats: true
-        )
-    }
-    
-    @objc private func timeChanged() {
-        
-        time -= 1
-        
-        if time == 0 {
-            timer.invalidate()
-            showAlertTimeIsOver()
-        }
+        viewModel.startRound()
     }
     
     private func showAlertTimeIsOver() {
