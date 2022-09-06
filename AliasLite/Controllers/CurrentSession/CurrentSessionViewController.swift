@@ -220,7 +220,8 @@ class CurrentSessionViewController: UIViewController {
         }
         
         let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
-            print("Log")
+            let navigationController = UINavigationController(rootViewController: GameSettingsViewController())
+            self.present(navigationController, animated: true)
         }
 
         let endSession = UIAlertAction(title: "End session", style: .destructive) { _ in
