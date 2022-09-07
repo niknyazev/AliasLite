@@ -19,15 +19,23 @@ class GameLogViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.logData.count
+        viewModel.log(for: section).count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.playersNames.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        viewModel.title(for: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "logRowData", for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = viewModel.logData[indexPath.row].player?.name ?? "" // TODO: need view model
-        content.secondaryText = viewModel.logData[indexPath.row].word?.text ?? ""
+        content.text = viewModel.log(for: indexPath.section)[indexPath.row].word?.text ?? ""
+//        content.secondaryText = viewModel.logData[indexPath.row].word?.text ?? ""
         cell.contentConfiguration = content
         return cell
     }

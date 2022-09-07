@@ -8,9 +8,34 @@
 import Foundation
 
 protocol GameLogViewModelProtocol {
-    var logData: [GameLog] { get }
+    
+    var playersNames: [String] { get }
+    
+    func title(for section: Int) -> String
+    func log(for section: Int) -> [GameLog]
 }
 
 class GameLogViewModel: GameLogViewModelProtocol {
-    let logData = StorageManager.shared.fetchLogData()
+
+    let playersNames: [String]
+    private let logData: [String: [GameLog]]
+    
+    init() {
+        logData = StorageManager.shared.fetchLogData().reduce(into: [:]) { result, logRow in
+            let name = logRow.player?.name ?? "Unknown"
+            result[name] == nil
+                ? result[name] = [logRow]
+                : result[name]?.append(logRow)
+        }
+        playersNames = Array(logData.keys)
+    }
+   
+    func title(for section: Int) -> String {
+        playersNames[section]
+    }
+    
+    func log(for section: Int) -> [GameLog] {
+        logData[playersNames[section]] ?? []
+    }
+    
 }
