@@ -14,7 +14,7 @@ class GameLogViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "logRowData")
+        tableView.register(LogCell.self, forCellReuseIdentifier: LogCell.cellID)
         viewModel = GameLogViewModel()
         title = "Game log"
     }
@@ -32,12 +32,26 @@ class GameLogViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "logRowData", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: LogCell.cellID, for: indexPath)
 
         var content = cell.defaultContentConfiguration()
         content.text = viewModel.log(for: indexPath.section)[indexPath.row].word?.text ?? ""
-//        content.secondaryText = viewModel.logData[indexPath.row].word?.text ?? ""
+        content.secondaryText = viewModel.log(for: indexPath.section)[indexPath.row].guessed
+            ? "guessed" : "dropped"
         cell.contentConfiguration = content
         return cell
+    }
+}
+
+class LogCell: UITableViewCell {
+    
+    static let cellID = "playerData"
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
