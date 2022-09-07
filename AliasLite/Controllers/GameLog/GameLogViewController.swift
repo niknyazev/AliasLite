@@ -13,6 +13,7 @@ class GameLogViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "logRowData")
         viewModel = GameLogViewModel()
         title = "Game log"
