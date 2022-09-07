@@ -36,9 +36,13 @@ class GameLogViewController: UITableViewController {
 
         var content = cell.defaultContentConfiguration()
         content.text = viewModel.log(for: indexPath.section)[indexPath.row].word?.text ?? ""
-        content.secondaryText = viewModel.log(for: indexPath.section)[indexPath.row].guessed
-            ? "guessed" : "dropped"
+       
+        let wordIsGuessed = viewModel.log(for: indexPath.section)[indexPath.row].guessed
+        content.secondaryText = wordIsGuessed ? "guessed" : "dropped"
         cell.contentConfiguration = content
+        
+        cell.backgroundColor = wordIsGuessed ? .green : .red
+        
         return cell
     }
 }
