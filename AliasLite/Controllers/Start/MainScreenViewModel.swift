@@ -10,19 +10,19 @@ import Foundation
 protocol MainScreenViewModelProtocol {
     var playersCount: Int { get }
     var viewTitle: String { get }
-    func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol
+    var numberOfSections: Int { get }
+    func getPlayerData(for section: Int, and index: Int) -> PlayerDataViewModelProtocol
 }
 
 class MainScreenViewModel: MainScreenViewModelProtocol {
     
-    private let storageManager = StorageManager.shared
-        
+    let numberOfSections = 2
     var playersCount: Int {
         topPlayers.count
     }
-    
     let viewTitle = "Alias lite"
     
+    private let storageManager = StorageManager.shared
     private let topPlayers: [Player]
     
     init() {
@@ -33,7 +33,8 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
         }
     }
 
-    func getPlayerData(for index: Int) -> PlayerDataViewModelProtocol {
+    func getPlayerData(for section: Int, and index: Int) -> PlayerDataViewModelProtocol {
         PlayerDataViewModel(player: topPlayers[index])
     }
+    
 }

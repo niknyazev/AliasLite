@@ -107,6 +107,10 @@ class MainScreenViewController: UIViewController {
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.playersCount
     }
