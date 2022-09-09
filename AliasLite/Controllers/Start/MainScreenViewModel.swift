@@ -27,8 +27,8 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     private let currentGamePlayers: [Player]
     
     init() {
-        topPlayers = storageManager.fetchPlayers()
-        currentGamePlayers = storageManager.fetchPlayers().suffix(2) // TODO: mock data
+        topPlayers = Array(storageManager.fetchPlayers().prefix(5))
+        currentGamePlayers = Array(storageManager.fetchPlayers().prefix(2)) // TODO: mock data
         
         if storageManager.fetchWords().count == 0 {
             storageManager.importWords()
@@ -55,7 +55,7 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
         if section == 0 && !currentGamePlayers.isEmpty {
             return "Current game players"
         } else {
-            return "Top players"
+            return "Top 5 players"
         }
     }
 }
