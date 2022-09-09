@@ -107,18 +107,22 @@ class MainScreenViewController: UIViewController {
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        viewModel.title(for: section)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.playersCount
+        viewModel.playersCount(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.cellID, for: indexPath)
-        let player = viewModel.getPlayerData(for: indexPath.row)
+        let player = viewModel.getPlayerData(for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.text = player.name
         content.secondaryText = "\(player.score)"
