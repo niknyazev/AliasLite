@@ -10,7 +10,6 @@ import UIKit
 class GameSettingsViewController: UITableViewController {
     
     let playerCellID = "player"
-    let buttonCellID = "button"
     let valueCellID = "value"
     
     private var viewModel: GameSettingsViewModelProtocol!
@@ -51,7 +50,7 @@ class GameSettingsViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: playerCellID)
-        tableView.register(ButtonCell.self, forCellReuseIdentifier: buttonCellID)
+        tableView.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.cellId)
         tableView.register(ValueCell.self, forCellReuseIdentifier: valueCellID)
     }
     
@@ -113,6 +112,8 @@ class GameSettingsViewController: UITableViewController {
 }
 
 class ButtonCell: UITableViewCell {
+    
+    static let cellId = "button"
     
     private lazy var startLabel: UILabel = {
         let label = UILabel()
@@ -211,7 +212,7 @@ extension GameSettingsViewController {
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellID, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: ButtonCell.cellId, for: indexPath)
             return cell
         }
     }

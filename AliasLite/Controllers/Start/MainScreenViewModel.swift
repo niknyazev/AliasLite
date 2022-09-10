@@ -36,26 +36,26 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     }
 
     func getPlayerData(for indexPath: IndexPath) -> PlayerDataViewModelProtocol {
-        if indexPath.section == 0 && !currentGamePlayers.isEmpty {
-            return PlayerDataViewModel(player: currentGamePlayers[indexPath.row])
-        } else {
+        if indexPath.section == 0 {
             return PlayerDataViewModel(player: topPlayers[indexPath.row])
+        } else {
+            return PlayerDataViewModel(player: currentGamePlayers[indexPath.row])
         }
     }
     
     func playersCount(for section: Int) -> Int {
-        if section == 0 && !currentGamePlayers.isEmpty {
-            return currentGamePlayers.count
-        } else {
+        if section == 0 {
             return topPlayers.count
+        } else {
+            return currentGamePlayers.count
         }
     }
     
     func title(for section: Int) -> String {
-        if section == 0 && !currentGamePlayers.isEmpty {
-            return "Current game players"
+        if section == 0 {
+            return "Top players"
         } else {
-            return "Top 5 players"
+            return "Current game players"
         }
     }
 }
