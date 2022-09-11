@@ -12,16 +12,35 @@ class MainScreenViewController: UIViewController {
     // MARK: - Properties
     
     private var viewModel: MainScreenViewModelProtocol!
+    private let buttonHeight: CGFloat = 46
     
-    private lazy var startNewGame: UIButton = {
+    private lazy var startGameButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
         button.setTitle("New game", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var continueButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
+        button.setTitle("Continue game", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var buttonsStack: UIStackView = {
+        let result = UIStackView(arrangedSubviews: [startGameButton, continueButton])
+        result.distribution = .fillEqually
+        result.spacing = 10
+        result.alignment = .center
+        result.axis = .vertical
+        return result
     }()
     
     private lazy var tableTopPlayers: UITableView = {
@@ -47,6 +66,14 @@ class MainScreenViewController: UIViewController {
         setupElements()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // TODO: need to remove this code in right place
+        startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
+        continueButton.layer.cornerRadius = continueButton.frame.height / 2
+        // TODO: end
+    }
+    
     // MARK: - Private methods
     
     private func setupElements() {
@@ -56,19 +83,34 @@ class MainScreenViewController: UIViewController {
     
     private func addConstraints() {
         
-        view.addSubview(startNewGame)
+        view.addSubview(buttonsStack)
         view.addSubview(tableTopPlayers)
-                
+        
         // Button
         
-        startNewGame.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            startNewGame.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            startNewGame.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startNewGame.widthAnchor.constraint(greaterThanOrEqualToConstant: 170)
+            buttonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -110),
+            buttonsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            buttonsStack.widthAnchor.constraint(equalToConstant: 250),
+            buttonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        startGameButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            startGameButton.widthAnchor.constraint(equalTo: buttonsStack.widthAnchor)
+        ])
+        
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            continueButton.widthAnchor.constraint(equalTo: buttonsStack.widthAnchor)
+        ])
+        
+        startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
+                
         // Table view
         
         tableTopPlayers.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +119,7 @@ class MainScreenViewController: UIViewController {
             tableTopPlayers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableTopPlayers.bottomAnchor.constraint(equalTo: startNewGame.topAnchor, constant: -30)
+            tableTopPlayers.bottomAnchor.constraint(equalTo: startGameButton.topAnchor, constant: -30)
         ])
     }
     
