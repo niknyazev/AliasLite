@@ -33,16 +33,7 @@ class MainScreenViewController: UIViewController {
         button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
         return button
     }()
-    
-    private lazy var buttonsStack: UIStackView = {
-        let result = UIStackView(arrangedSubviews: [startGameButton, continueButton])
-        result.distribution = .fillEqually
-        result.spacing = 10
-        result.alignment = .center
-        result.axis = .vertical
-        return result
-    }()
-    
+        
     private lazy var tableTopPlayers: UITableView = {
         let result = UITableView()
         result.dataSource = self
@@ -65,13 +56,15 @@ class MainScreenViewController: UIViewController {
         addConstraints()
         setupElements()
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
+        continueButton.layer.cornerRadius = continueButton.frame.height / 2
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // TODO: need to remove this code in right place
-        startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
-        continueButton.layer.cornerRadius = continueButton.frame.height / 2
-        // TODO: end
     }
     
     // MARK: - Private methods
@@ -83,34 +76,30 @@ class MainScreenViewController: UIViewController {
     
     private func addConstraints() {
         
-        view.addSubview(buttonsStack)
+        view.addSubview(startGameButton)
+        view.addSubview(continueButton)
         view.addSubview(tableTopPlayers)
         
-        // Button
-        
-        buttonsStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            buttonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -110),
-            buttonsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            buttonsStack.widthAnchor.constraint(equalToConstant: 250),
-            buttonsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        // Buttons
         
         startGameButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            startGameButton.widthAnchor.constraint(equalTo: buttonsStack.widthAnchor)
+            startGameButton.heightAnchor.constraint(equalToConstant: 40),
+            startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            startGameButton.widthAnchor.constraint(equalToConstant: 250),
+            startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
+    
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            continueButton.widthAnchor.constraint(equalTo: buttonsStack.widthAnchor)
+            continueButton.heightAnchor.constraint(equalToConstant: 40),
+            continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -75),
+            continueButton.widthAnchor.constraint(equalToConstant: 250),
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
-                
         // Table view
         
         tableTopPlayers.translatesAutoresizingMaskIntoConstraints = false
@@ -119,7 +108,7 @@ class MainScreenViewController: UIViewController {
             tableTopPlayers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableTopPlayers.bottomAnchor.constraint(equalTo: startGameButton.topAnchor, constant: -30)
+            tableTopPlayers.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -30)
         ])
     }
     
