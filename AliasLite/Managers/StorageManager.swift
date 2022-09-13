@@ -73,8 +73,17 @@ class StorageManager {
         saveContext()
     }
     
-    func saveGameSettings() {
+    func saveGameSettings(gameGoal: Int, roundDuration: Int, players: [Player], currentPlayer: Player? = nil) {
+                
+        let savedSettings = fetchSettings()
+        let settings = savedSettings == nil ? GameSettings(context: viewContext) : savedSettings!
         
+        settings.players = NSSet(array: players)
+        settings.gameGoal = Int16(gameGoal)
+        settings.roundDuration = Int16(roundDuration)
+        settings.currentPlayer = currentPlayer
+              
+        saveContext()
     }
     
     func fetchWords() -> [Word] {
@@ -85,6 +94,18 @@ class StorageManager {
             return try viewContext.fetch(fetchRequest)
         } catch {
             return []
+        }
+    }
+    
+    func fetchSettings() -> GameSettings? {
+        
+        let fetchRequest = GameSettings.fetchRequest()
+        
+        do {
+            let result = try viewContext.fetch(fetchRequest)
+            return result.first
+        } catch {
+            return nil
         }
     }
     

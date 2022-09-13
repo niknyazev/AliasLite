@@ -104,6 +104,7 @@ class GameSettingsViewController: UITableViewController {
     }
         
     private func startGamePressed() {
+        viewModel.saveGameSettings(gameGoal: 60, roundDuration: 120)
         let gameSession = UINavigationController(rootViewController: CurrentSessionViewController())
         gameSession.modalPresentationStyle = .fullScreen
         present(gameSession, animated: true)
@@ -226,6 +227,8 @@ extension GameSettingsViewController {
             guard let cell = cell else {
                 return
             }
+            
+            viewModel.selectPlayer(index: indexPath.row)
             
             cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
             

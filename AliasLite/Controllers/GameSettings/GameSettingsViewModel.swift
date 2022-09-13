@@ -16,6 +16,8 @@ protocol GameSettingsViewModelProtocol {
     
     func getPlayerName(index: Int) -> String
     func savePlayer(name: String)
+    func saveGameSettings(gameGoal: Int, roundDuration: Int)
+    func selectPlayer(index: Int)
 }
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
@@ -29,8 +31,29 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
         players.count
     }
 
-    private let playersManager = PlayersManager.shared
+    private let storageManager = StorageManager.shared
     private var players: [Player] = []
+    private var selectedPlayers: Set<Player> = []
+    
+    func selectPlayer(index: Int) {
+        
+        let player = players[index]
+        
+        if selectedPlayers.contains(player) {
+            selectedPlayers.remove(player)
+        } else {
+            selectedPlayers.insert(player)
+        }
+    }
+    
+    func saveGameSettings(gameGoal: Int, roundDuration: Int) {
+        storageManager.saveGameSettings(
+            gameGoal: gameGoal,
+            roundDuration: roundDuration,
+            players: Array(selectedPlayers),
+            currentPlayer: selectedPlayers.first
+        )
+    }
     
     func getPlayerName(index: Int) -> String {
         players[index].name ?? ""
@@ -47,6 +70,6 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
     }
     
     private func getPlayers() {
-        players = playersManager.getTopPlayers()
+        players = storageManager.fetchPlayers()
     }
 }
