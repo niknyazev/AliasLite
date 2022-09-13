@@ -6,9 +6,11 @@
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word"/>
     </entity>
     <entity name="LastGameData" representedClassName="LastGameData" syncable="YES" codeGenerationType="class">
-        <attribute name="isCurrent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="gameGoal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="roundDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scores" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
+        <relationship name="currentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
@@ -20,7 +22,7 @@
     </entity>
     <elements>
         <element name="GameLog" positionX="-54" positionY="27" width="128" height="74"/>
-        <element name="LastGameData" positionX="-54" positionY="9" width="128" height="74"/>
+        <element name="LastGameData" positionX="-54" positionY="9" width="128" height="104"/>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="Word" positionX="-54" positionY="9" width="128" height="59"/>
     </elements>
