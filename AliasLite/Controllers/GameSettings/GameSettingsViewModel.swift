@@ -11,7 +11,7 @@ protocol GameSettingsViewModelProtocol {
     // TODO: Substitute Player with view model
     
     var playersCount: Int { get }
-    var sessionSettings: [(settingName: String, settingValue: String)] { get }
+    var sessionSettings: [SettingsRow] { get }
     var viewDidChange: (() -> Void)? { get set }
     
     func getPlayerName(index: Int) -> String
@@ -20,13 +20,30 @@ protocol GameSettingsViewModelProtocol {
     func selectPlayer(index: Int)
 }
 
+struct SettingsRow {
+
+    enum SettingsTypes: String {
+        case roundDuration = "Round duration"
+        case totalScore = "Total score"
+    }
+
+    let type: SettingsTypes
+    var title: String {
+        type.rawValue
+    }
+    let value: Int
+    var valueTitle: String {
+        "\(value)"
+    }
+}
+
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
     
-    var viewDidChange: (() -> Void)?
-    var sessionSettings = [
-        (settingName: "Round duration:", settingValue: "60"),
-        (settingName: "Total score:", settingValue: "100")
+    let sessionSettings = [
+        SettingsRow(type: .roundDuration, value: 60),
+        SettingsRow(type: .totalScore, value: 300)
     ]
+    var viewDidChange: (() -> Void)?
     var playersCount: Int {
         players.count
     }

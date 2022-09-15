@@ -14,14 +14,6 @@ class GameSettingsViewController: UITableViewController {
     
     private var viewModel: GameSettingsViewModelProtocol!
         
-    private lazy var tableDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Choose the players:"
-        label.font = .systemFont(ofSize: 20)
-        label.textColor = .black
-        return label
-    }()
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElements()
@@ -168,7 +160,7 @@ extension GameSettingsViewController {
         if section == 0 {
             return viewModel.playersCount
         } else if section == 1 {
-            return 2
+            return viewModel.sessionSettings.count
         } else {
             return 1
         }
@@ -188,7 +180,8 @@ extension GameSettingsViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: playerCellID, for: indexPath)
             var content = cell.defaultContentConfiguration()
@@ -199,19 +192,19 @@ extension GameSettingsViewController {
             
             return cell
             
-        } else if indexPath.section == 1 {
+        case 1:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: valueCellID, for: indexPath)
             var content = cell.defaultContentConfiguration()
             
-            content.text = viewModel.sessionSettings[indexPath.row].settingName
-            content.secondaryText = viewModel.sessionSettings[indexPath.row].settingValue
+            content.text = viewModel.sessionSettings[indexPath.row].title
+            content.secondaryText = viewModel.sessionSettings[indexPath.row].valueTitle
             
             cell.contentConfiguration = content
             
             return cell
             
-        } else {
+        default:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: ButtonCell.cellId, for: indexPath)
             return cell
