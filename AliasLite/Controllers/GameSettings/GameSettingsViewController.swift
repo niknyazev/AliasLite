@@ -157,11 +157,12 @@ extension GameSettingsViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        switch section {
+        case 0:
             return viewModel.playersCount
-        } else if section == 1 {
+        case 1:
             return viewModel.sessionSettings.count
-        } else {
+        default:
             return 1
         }
     }
@@ -213,7 +214,8 @@ extension GameSettingsViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             
             let cell = tableView.cellForRow(at: indexPath)
             
@@ -225,9 +227,9 @@ extension GameSettingsViewController {
             
             cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
             
-        } else if indexPath.section == 1 {
+        case 1:
             changeSessionDuration()
-        } else {
+        default:
             startGamePressed()
         }
     }
