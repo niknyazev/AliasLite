@@ -93,7 +93,7 @@ class StorageManager {
         settings.gameGoal = Int16(gameGoal)
         settings.roundDuration = Int16(roundDuration)
         settings.currentPlayer = currentPlayer
-              
+        
         saveContext()
     }
     

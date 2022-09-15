@@ -10,11 +10,12 @@
         <attribute name="roundDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scores" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="currentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
-        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="settings" inverseEntity="Player"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="settings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GameSettings" inverseName="players" inverseEntity="GameSettings"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES" codeGenerationType="class">
         <attribute name="level" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -23,7 +24,7 @@
     <elements>
         <element name="GameLog" positionX="-54" positionY="27" width="128" height="74"/>
         <element name="GameSettings" positionX="-54" positionY="9" width="128" height="104"/>
-        <element name="Player" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="74"/>
         <element name="Word" positionX="-54" positionY="9" width="128" height="59"/>
     </elements>
 </model>
