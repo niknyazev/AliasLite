@@ -71,20 +71,25 @@ class GameSettingsViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func changeSessionDuration() {
+    private func changeValue(for settingsIndex: Int) {
+        
+        let currentSettings = viewModel.sessionSettings[settingsIndex]
         
         let alertController = UIAlertController(
             title: nil,
-            message: "Enter duration of session",
+            message: currentSettings.alertTitle,
             preferredStyle: .alert
         )
 
         alertController.addTextField { textField in
-            textField.placeholder = "Duration"
+            textField.placeholder = currentSettings.title
+            textField.text = currentSettings.valueTitle
         }
 
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let newValue = alertController.textFields?.first?.text else { return }
+            currentSettings.value = Int(newValue) ?? 0
+            self.tableView.reloadRows(at: [IndexPath(row: settingsIndex, section: 1)], with: .none)
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -228,7 +233,8 @@ extension GameSettingsViewController {
             cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
             
         case 1:
-            changeSessionDuration()
+            changeValue(for: indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: true)
         default:
             startGamePressed()
         }

@@ -20,7 +20,7 @@ protocol GameSettingsViewModelProtocol {
     func selectPlayer(index: Int)
 }
 
-struct SettingsRow {
+class SettingsRow {
 
     enum SettingsTypes: String {
         case roundDuration = "Round duration"
@@ -31,17 +31,32 @@ struct SettingsRow {
     var title: String {
         type.rawValue
     }
-    let value: Int
+    var value: Int
     var valueTitle: String {
         "\(value)"
+    }
+    let alertTitle: String
+    
+    init(type: SettingsTypes, value: Int, alertTitle: String) {
+        self.type = type
+        self.value = value
+        self.alertTitle = alertTitle
     }
 }
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
     
     let sessionSettings = [
-        SettingsRow(type: .roundDuration, value: 60),
-        SettingsRow(type: .totalScore, value: 300)
+        SettingsRow(
+            type: .roundDuration,
+            value: 60,
+            alertTitle: "Enter the duration of the round"
+        ),
+        SettingsRow(
+            type: .totalScore,
+            value: 300,
+            alertTitle: "Enter the goal scores of the game"
+        )
     ]
     var viewDidChange: (() -> Void)?
     var playersCount: Int {
