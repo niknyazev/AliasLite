@@ -51,6 +51,17 @@ class StorageManager {
         }
     }
     
+    func fetchPlayersFromGameSettings() -> [Player] {
+        
+        let settings = fetchSettings()
+        
+        if let players = settings?.players {
+            return (players.allObjects as? [Player]) ?? []
+        } else {
+            return []
+        }
+    }
+    
     @discardableResult
     func savePlayer(name: String) -> Player {
         

@@ -95,7 +95,7 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
         storageManager.saveGameSettings(
             gameGoal: gameGoal,
             roundDuration: roundDuration,
-            players: Array(selectedPlayers),
+            players: Array(selectedPlayers).shuffled(),
             currentPlayer: selectedPlayers.first
         )
     }

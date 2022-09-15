@@ -55,7 +55,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     private var time = 5
     
     init() {
-        players = storageManager.fetchPlayers()
+        players = storageManager.fetchPlayersFromGameSettings()
         currentPlayer = players.first
         words = storageManager.fetchWords()
     }
