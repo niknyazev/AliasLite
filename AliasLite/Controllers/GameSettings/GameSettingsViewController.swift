@@ -101,7 +101,7 @@ class GameSettingsViewController: UITableViewController {
     }
         
     private func startGamePressed() {
-        viewModel.saveGameSettings(gameGoal: 60, roundDuration: 120)
+        viewModel.saveGameSettings()
         let gameSession = UINavigationController(rootViewController: CurrentSessionViewController())
         gameSession.modalPresentationStyle = .fullScreen
         present(gameSession, animated: true)

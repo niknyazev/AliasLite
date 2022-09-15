@@ -16,7 +16,7 @@ protocol GameSettingsViewModelProtocol {
     
     func getPlayerName(index: Int) -> String
     func savePlayer(name: String)
-    func saveGameSettings(gameGoal: Int, roundDuration: Int)
+    func saveGameSettings()
     func selectPlayer(index: Int)
 }
 
@@ -78,7 +78,20 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
         }
     }
     
-    func saveGameSettings(gameGoal: Int, roundDuration: Int) {
+    func saveGameSettings() {
+        
+        var gameGoal = 0
+        var roundDuration = 0
+        
+        sessionSettings.forEach { settingRow in
+            switch settingRow.type {
+            case .totalScore:
+                gameGoal = settingRow.value
+            case .roundDuration:
+                roundDuration = settingRow.value
+            }
+        }
+        
         storageManager.saveGameSettings(
             gameGoal: gameGoal,
             roundDuration: roundDuration,
