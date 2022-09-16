@@ -46,18 +46,7 @@ class SettingsRow {
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
     
-    let sessionSettings = [
-        SettingsRow(
-            type: .roundDuration,
-            value: 60,
-            alertTitle: "Enter the duration of the round"
-        ),
-        SettingsRow(
-            type: .totalScore,
-            value: 300,
-            alertTitle: "Enter the goal scores of the game"
-        )
-    ]
+    let sessionSettings: [SettingsRow]
     var viewDidChange: (() -> Void)?
     var playersCount: Int {
         players.count
@@ -111,6 +100,22 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
     }
     
     init() {
+        
+        let currentSettings = storageManager.fetchSettings()
+        
+        sessionSettings = [
+            SettingsRow(
+                type: .roundDuration,
+                value: Int(currentSettings?.roundDuration ?? 0),
+                alertTitle: "Enter the duration of the round"
+            ),
+            SettingsRow(
+                type: .totalScore,
+                value: Int(currentSettings?.gameGoal ?? 0),
+                alertTitle: "Enter the goal scores of the game"
+            )
+        ]
+        
         getPlayers()
     }
     
