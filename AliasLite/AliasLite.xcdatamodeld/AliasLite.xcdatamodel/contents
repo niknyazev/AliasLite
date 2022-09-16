@@ -2,19 +2,20 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GameLog" representedClassName="GameLog" syncable="YES" codeGenerationType="class">
         <attribute name="guessed" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
-        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word"/>
+        <attribute name="word" optional="YES" attributeType="String"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="log" inverseEntity="Player"/>
     </entity>
     <entity name="GameSettings" representedClassName="GameSettings" syncable="YES" codeGenerationType="class">
         <attribute name="gameGoal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="roundDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scores" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="currentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player"/>
-        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="settings" inverseEntity="Player"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Player" inverseName="settings" inverseEntity="Player"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="log" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GameLog" inverseName="player" inverseEntity="GameLog"/>
         <relationship name="settings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GameSettings" inverseName="players" inverseEntity="GameSettings"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES" codeGenerationType="class">
@@ -23,8 +24,8 @@
     </entity>
     <elements>
         <element name="GameLog" positionX="-54" positionY="27" width="128" height="74"/>
-        <element name="GameSettings" positionX="-54" positionY="9" width="128" height="104"/>
-        <element name="Player" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="GameSettings" positionX="-54" positionY="9" width="128" height="89"/>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="Word" positionX="-54" positionY="9" width="128" height="59"/>
     </elements>
 </model>

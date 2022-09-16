@@ -35,7 +35,7 @@ class GameLogViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: LogCell.cellID, for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = viewModel.log(for: indexPath.section)[indexPath.row].word?.text ?? ""
+        content.text = viewModel.log(for: indexPath.section)[indexPath.row].word ?? ""
        
         let wordIsGuessed = viewModel.log(for: indexPath.section)[indexPath.row].guessed
         content.secondaryText = wordIsGuessed ? "guessed" : "dropped"

@@ -56,7 +56,7 @@ class StorageManager {
         let settings = fetchSettings()
         
         if let players = settings?.players {
-            return (players.allObjects as? [Player]) ?? []
+            return (players.array as? [Player]) ?? []
         } else {
             return []
         }
@@ -78,7 +78,7 @@ class StorageManager {
         let log = GameLog(context: viewContext)
         
         log.player = player
-        log.word = word
+        log.word = word.text
         log.guessed = guessed
         
         saveContext()
@@ -89,10 +89,9 @@ class StorageManager {
         let savedSettings = fetchSettings()
         let settings = savedSettings == nil ? GameSettings(context: viewContext) : savedSettings!
         
-        settings.players = NSSet(array: players)
+        settings.players = NSOrderedSet(array: players)
         settings.gameGoal = Int16(gameGoal)
         settings.roundDuration = Int16(roundDuration)
-        settings.currentPlayer = currentPlayer
         
         saveContext()
     }
@@ -136,7 +135,7 @@ class StorageManager {
         let words = WordsReader.shared.getWords()
         
         for word in words {
-            saveWord(text: word.text ?? "")
+            saveWord(text: word.text)
         }
     }
     
