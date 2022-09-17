@@ -50,8 +50,8 @@ class StorageManager {
             return []
         }
     }
-    
-    func fetchPlayersFromGameSettings() -> [Player] {
+        
+    func fetchCurrentGamePlayers() -> [Player] {
         
         let settings = fetchSettings()
         
@@ -80,7 +80,7 @@ class StorageManager {
         log.player = player
         log.word = word.text
         log.guessed = guessed
-        
+          
         saveContext()
     }
     

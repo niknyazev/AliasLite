@@ -138,7 +138,9 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let player = viewModel.getPlayerData(for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.text = player.name
-        content.secondaryText = "\(player.score)"
+        content.secondaryText = indexPath.section == 0
+            ? "\(player.score)"
+            : "\(player.currentGameScores)"
         content.image = UIImage(named: "flat") // TODO: remove this mock
         content.imageProperties.maximumSize = CGSize(width: 40, height: 40)
         content.imageProperties.cornerRadius = 20

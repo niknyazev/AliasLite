@@ -28,7 +28,7 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     
     init() {
         topPlayers = Array(storageManager.fetchPlayers().prefix(5))
-        currentGamePlayers = Array(storageManager.fetchPlayers().prefix(2)) // TODO: mock data
+        currentGamePlayers = Array(storageManager.fetchCurrentGamePlayers().prefix(4)) // TODO: mock data
         
         if storageManager.fetchWords().count == 0 {
             storageManager.importWords()

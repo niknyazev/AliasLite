@@ -10,16 +10,19 @@ import Foundation
 protocol PlayerDataViewModelProtocol {
     var name: String { get }
     var score: Int { get }
+    var currentGameScores: Int { get }
 }
 
 class PlayerDataViewModel: PlayerDataViewModelProtocol {
     
     var name: String
-    // Rename to wins
+    // TODO: Rename to wins
     var score: Int
+    var currentGameScores: Int
     
     init(player: Player) {
         name = player.name ?? ""
         score = Int(player.wins)
+        currentGameScores = Int(player.currentScores)
     }
 }
