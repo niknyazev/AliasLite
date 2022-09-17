@@ -18,6 +18,7 @@ protocol GameSettingsViewModelProtocol {
     func savePlayer(name: String)
     func saveGameSettings()
     func selectPlayer(index: Int)
+    func isPlayerSelected(index: Int) -> Bool
 }
 
 class SettingsRow {
@@ -45,7 +46,7 @@ class SettingsRow {
 }
 
 class GameSettingsViewModel: GameSettingsViewModelProtocol {
-    
+
     let sessionSettings: [SettingsRow]
     var viewDidChange: (() -> Void)?
     var playersCount: Int {
@@ -54,7 +55,12 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
 
     private let storageManager = StorageManager.shared
     private var players: [Player] = []
-    private var selectedPlayers: Set<Player> = []
+    private var selectedPlayers: Set<Player>
+    
+    func isPlayerSelected(index: Int) -> Bool {
+        let player = players[index]
+        return selectedPlayers.contains(player)
+    }
     
     func selectPlayer(index: Int) {
         
@@ -116,6 +122,7 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
             )
         ]
         
+        selectedPlayers = Set(storageManager.fetchCurrentGamePlayers())
         getPlayers()
     }
     

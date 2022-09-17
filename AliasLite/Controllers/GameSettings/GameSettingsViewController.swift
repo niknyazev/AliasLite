@@ -196,6 +196,10 @@ extension GameSettingsViewController {
             cell.selectionStyle = .none
             cell.contentConfiguration = content
             
+            cell.accessoryType = viewModel.isPlayerSelected(index: indexPath.row)
+                ? .checkmark
+                : .none
+            
             return cell
             
         case 1:
@@ -230,7 +234,9 @@ extension GameSettingsViewController {
             
             viewModel.selectPlayer(index: indexPath.row)
             
-            cell.accessoryType = (cell.accessoryType == .checkmark ? .none : .checkmark)
+            cell.accessoryType = viewModel.isPlayerSelected(index: indexPath.row)
+                ? .checkmark
+                : .none
             
         case 1:
             changeValue(for: indexPath.row)
