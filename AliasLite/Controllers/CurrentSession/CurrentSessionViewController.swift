@@ -224,8 +224,8 @@ class CurrentSessionViewController: UIViewController {
             self.present(navigationController, animated: true)
         }
 
-        let endSession = UIAlertAction(title: "End session", style: .destructive) { _ in
-            print("Log")
+        let endSession = UIAlertAction(title: "End game", style: .destructive) { _ in
+            self.questionBeforeEndingGame()
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -238,6 +238,26 @@ class CurrentSessionViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
  
+    private func questionBeforeEndingGame() {
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: "Do you want to finish game?",
+            preferredStyle: .alert
+        )
+
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+           
+        }
+
+        let noAction = UIAlertAction(title: "No", style: .cancel)
+
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @objc private func startPausePressed() {
         viewModel.startRound()
     }
