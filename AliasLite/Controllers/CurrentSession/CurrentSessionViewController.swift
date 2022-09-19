@@ -63,6 +63,15 @@ class CurrentSessionViewController: UIViewController {
         label.text = "Any word"
         label.font = .systemFont(ofSize: 30)
         label.textColor = .black
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "60"
+        label.font = .systemFont(ofSize: 30)
+        label.textColor = .blue
         return label
     }()
     
@@ -102,7 +111,7 @@ class CurrentSessionViewController: UIViewController {
         viewModel = CurrentSessionViewModel()
         viewModel.viewModelDidChange = fillViewWithData
         viewModel.timerDidChange = { time in
-            self.startPauseButton.setTitle("\(time)", for: .normal)
+            self.timerLabel.text = "\(time)"
             if time == 0 {
                 self.showAlertTimeIsOver()
             }
@@ -115,6 +124,7 @@ class CurrentSessionViewController: UIViewController {
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
         scoreLabel.text = viewModel.scoresTitle
+        timerLabel.text = viewModel.timeTitle
     }
     
     private func setupElements() {
@@ -135,6 +145,7 @@ class CurrentSessionViewController: UIViewController {
         view.addSubview(scoreLabel)
         view.addSubview(droppedLabel)
         view.addSubview(guessedLabel)
+        view.addSubview(timerLabel)
         
         // Working with word buttons
 
@@ -175,15 +186,13 @@ class CurrentSessionViewController: UIViewController {
             scoreLabel.widthAnchor.constraint(equalToConstant: 120)
         ])
                 
-        // Start button
+        // Timer
         
-        startPauseButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            startPauseButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startPauseButton.widthAnchor.constraint(equalToConstant: 120),
-            startPauseButton.heightAnchor.constraint(equalToConstant: 50)
+            timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
                         
         // Current word
@@ -193,6 +202,17 @@ class CurrentSessionViewController: UIViewController {
         NSLayoutConstraint.activate([
             currentWordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentWordLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        // Start button
+        
+        startPauseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            startPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startPauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            startPauseButton.widthAnchor.constraint(equalToConstant: 120),
+            startPauseButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -260,6 +280,8 @@ class CurrentSessionViewController: UIViewController {
     }
     
     @objc private func startPausePressed() {
+        startPauseButton.isHidden = true
+        currentWordLabel.isHidden = false
         viewModel.startRound()
     }
     

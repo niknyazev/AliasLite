@@ -15,6 +15,7 @@ protocol CurrentSessionViewModelProtocol {
     var viewModelDidChange: (() -> Void)? { get set }
     var timerDidChange: ((Int) -> Void)? { get set } // TODO: make boxing
     var scoresTitle: String { get }
+    var timeTitle: String { get }
     
     func startRound()
     func wordGuessed()
@@ -26,6 +27,9 @@ protocol CurrentSessionViewModelProtocol {
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     var timerDidChange: ((Int) -> Void)?
+    var timeTitle: String {
+        "\(time)"
+    }
     var scoresTitle: String {
         "Scores: \(scores)"
     }
@@ -38,7 +42,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var playerName: String {
         currentPlayer?.name ?? ""
     }
-    var currentWord = "Press start"
+    var currentWord: String
     var viewModelDidChange: (() -> Void)?
     
     private let players: [Player]
@@ -53,19 +57,22 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     }
     private let storageManager = StorageManager.shared
     private var timer = Timer()
-    private var time = 5
+    private var time: Int
+    private let gameSettings: GameSettings?
     
     init() {
         players = storageManager.fetchCurrentGamePlayers()
         currentPlayer = players.first
         words = storageManager.fetchWords()
+        currentWord = words.first?.text ?? ""
+        gameSettings = storageManager.fetchSettings()
+        time = Int(gameSettings?.roundDuration ?? 0)
     }
     
     // MARK: - Public methods
     
     func startRound() {
         startTimer()
-        currentWord = words.first?.text ?? ""
     }
     
     func endGame() {
