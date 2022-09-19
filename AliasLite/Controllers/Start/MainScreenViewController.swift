@@ -56,15 +56,17 @@ class MainScreenViewController: UIViewController {
         addConstraints()
         setupElements()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         startGameButton.layer.cornerRadius = startGameButton.frame.height / 2
         continueButton.layer.cornerRadius = continueButton.frame.height / 2
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateData()
+        tableTopPlayers.reloadData()
     }
     
     // MARK: - Private methods

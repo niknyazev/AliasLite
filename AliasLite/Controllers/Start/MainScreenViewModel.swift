@@ -13,6 +13,7 @@ protocol MainScreenViewModelProtocol {
     func getPlayerData(for indexPath: IndexPath) -> PlayerDataViewModelProtocol
     func playersCount(for section: Int) -> Int
     func title(for section: Int) -> String
+    func updateData()
 }
 
 class MainScreenViewModel: MainScreenViewModelProtocol {
@@ -23,18 +24,23 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
     let viewTitle = "Alias lite"
     
     private let storageManager = StorageManager.shared
-    private let topPlayers: [Player]
-    private let currentGamePlayers: [Player]
+    private var topPlayers: [Player]
+    private var currentGamePlayers: [Player]
     
     init() {
         topPlayers = Array(storageManager.fetchPlayers().prefix(5))
-        currentGamePlayers = Array(storageManager.fetchCurrentGamePlayers().prefix(4)) // TODO: mock data
+        currentGamePlayers = Array(storageManager.fetchCurrentGamePlayers().prefix(4))
         
         if storageManager.fetchWords().count == 0 {
             storageManager.importWords()
         }
     }
 
+    func updateData() {
+        topPlayers = Array(storageManager.fetchPlayers().prefix(5))
+        currentGamePlayers = Array(storageManager.fetchCurrentGamePlayers().prefix(4))
+    }
+    
     func getPlayerData(for indexPath: IndexPath) -> PlayerDataViewModelProtocol {
         if indexPath.section == 0 {
             return PlayerDataViewModel(player: topPlayers[indexPath.row])
