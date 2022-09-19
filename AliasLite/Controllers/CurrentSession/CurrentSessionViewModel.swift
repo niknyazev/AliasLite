@@ -20,6 +20,7 @@ protocol CurrentSessionViewModelProtocol {
     func wordGuessed()
     func wordDropped()
     func nextPlayer()
+    func endGame()
 }
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
@@ -65,6 +66,10 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     func startRound() {
         startTimer()
         currentWord = words.first?.text ?? ""
+    }
+    
+    func endGame() {
+        storageManager.removeGameData()
     }
     
     func wordGuessed() {

@@ -247,7 +247,8 @@ class CurrentSessionViewController: UIViewController {
         )
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
-           
+            self.viewModel.endGame()
+            self.dismiss(animated: true)
         }
 
         let noAction = UIAlertAction(title: "No", style: .cancel)

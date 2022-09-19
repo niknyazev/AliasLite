@@ -62,6 +62,23 @@ class StorageManager {
         }
     }
     
+    func removeGameData() {
+        
+        let log = fetchLogData()
+        
+        log.forEach {
+            delete($0)
+        }
+        
+        let settings = fetchSettings()
+        
+        guard let settings = settings else {
+            return
+        }
+        
+        delete(settings)
+    }
+    
     @discardableResult
     func savePlayer(name: String) -> Player {
         
