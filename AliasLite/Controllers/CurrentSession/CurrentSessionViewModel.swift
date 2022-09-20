@@ -123,6 +123,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
 
         currentPlayer = players[currentPlayerIndex]
         nextWord()
+        time = Int(gameSettings?.roundDuration ?? 0)
         viewModelDidChange?()
     }
     

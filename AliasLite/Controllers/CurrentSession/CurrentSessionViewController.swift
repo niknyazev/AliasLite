@@ -280,9 +280,13 @@ class CurrentSessionViewController: UIViewController {
     }
     
     @objc private func startPausePressed() {
-        startPauseButton.isHidden = true
-        currentWordLabel.isHidden = false
+        showHideStartButton(isHidden: true)
         viewModel.startRound()
+    }
+    
+    private func showHideStartButton(isHidden: Bool) {
+        startPauseButton.isHidden = isHidden
+        currentWordLabel.isHidden = !isHidden
     }
     
     private func showAlertTimeIsOver() {
@@ -295,6 +299,7 @@ class CurrentSessionViewController: UIViewController {
 
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             self.viewModel.nextPlayer()
+            self.showHideStartButton(isHidden: false)
         }
 
         alertController.addAction(okAction)
