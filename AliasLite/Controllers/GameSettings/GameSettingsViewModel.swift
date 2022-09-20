@@ -112,12 +112,12 @@ class GameSettingsViewModel: GameSettingsViewModelProtocol {
         sessionSettings = [
             SettingsRow(
                 type: .roundDuration,
-                value: Int(currentSettings?.roundDuration ?? 0),
+                value: Int(currentSettings?.roundDuration ?? 60),
                 alertTitle: "Enter the duration of the round"
             ),
             SettingsRow(
                 type: .totalScore,
-                value: Int(currentSettings?.gameGoal ?? 0),
+                value: Int(currentSettings?.gameGoal ?? 100),
                 alertTitle: "Enter the goal scores of the game"
             )
         ]
