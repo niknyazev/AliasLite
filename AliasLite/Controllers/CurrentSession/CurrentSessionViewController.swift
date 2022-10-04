@@ -123,8 +123,11 @@ class CurrentSessionViewController: UIViewController {
         currentWordLabel.text = viewModel.currentWord
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
+        guessWordButton.alpha = 0.3
+        dropWordButton.alpha = 0.3
         scoreLabel.text = viewModel.scoresTitle
         timerLabel.text = viewModel.timeTitle
+        changeAlphaButtons(isActive: false)
     }
     
     private func setupElements() {
@@ -281,7 +284,14 @@ class CurrentSessionViewController: UIViewController {
     
     @objc private func startPausePressed() {
         showHideStartButton(isHidden: true)
+        changeAlphaButtons(isActive: true)
         viewModel.startRound()
+    }
+    
+    private func changeAlphaButtons(isActive: Bool) {
+        let alphaValue = isActive ? 1 : 0.3
+        guessWordButton.alpha = alphaValue
+        dropWordButton.alpha = alphaValue
     }
     
     private func showHideStartButton(isHidden: Bool) {
