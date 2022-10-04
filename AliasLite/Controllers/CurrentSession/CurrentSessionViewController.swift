@@ -105,6 +105,7 @@ class CurrentSessionViewController: UIViewController {
         setupElements()
         // TODO: refactoring
         fillViewWithData()
+        changeAlphaButtons(isActive: false)
     }
     
     private func setupViewModel() {
@@ -114,6 +115,7 @@ class CurrentSessionViewController: UIViewController {
             self.timerLabel.text = "\(time)"
             if time == 0 {
                 self.showAlertTimeIsOver()
+                self.changeAlphaButtons(isActive: false)
             }
         }
     }
@@ -123,11 +125,8 @@ class CurrentSessionViewController: UIViewController {
         currentWordLabel.text = viewModel.currentWord
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
-        guessWordButton.alpha = 0.3
-        dropWordButton.alpha = 0.3
         scoreLabel.text = viewModel.scoresTitle
         timerLabel.text = viewModel.timeTitle
-        changeAlphaButtons(isActive: false)
     }
     
     private func setupElements() {
