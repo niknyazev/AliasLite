@@ -49,7 +49,7 @@ class CurrentSessionViewController: UIViewController {
         
     private lazy var startPauseButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = .blue
         button.setTitle("Start", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.setTitleColor(.white, for: .normal)
@@ -292,6 +292,7 @@ class CurrentSessionViewController: UIViewController {
         let alphaValue = isActive ? 1 : 0.3
         guessWordButton.alpha = alphaValue
         dropWordButton.alpha = alphaValue
+        scoreLabel.alpha = alphaValue
     }
     
     private func showHideStartButton(isHidden: Bool) {
