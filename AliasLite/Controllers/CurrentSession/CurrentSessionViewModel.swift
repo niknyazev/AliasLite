@@ -161,10 +161,17 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         
         if time == 0 {
             timer.invalidate()
+            restoreScores()
             playerDidChange?()
+            wordDidChange?()
         }
         
         timerDidChange?(time)
+    }
+    
+    private func restoreScores() {
+        wordsDropped = 0
+        wordsGuessed = 0
     }
     
     private func nextWord() {
