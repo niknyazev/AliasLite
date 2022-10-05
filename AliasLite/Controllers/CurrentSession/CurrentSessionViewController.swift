@@ -104,24 +104,27 @@ class CurrentSessionViewController: UIViewController {
         addConstraints()
         setupElements()
         // TODO: refactoring
-        fillViewWithData()
+        prepareForNewWord()
         changeAlphaButtons(isActive: false)
     }
     
     private func setupViewModel() {
         viewModel = CurrentSessionViewModel()
-        viewModel.viewModelDidChange = fillViewWithData
+        viewModel.viewModelDidChange = prepareForNewWord
+        viewModel.newRoundPrepare = {
+            self.changeAlphaButtons(isActive: false)
+            self.title = self.viewModel.playerName
+            self.showHideStartButton(isHidden: false)
+        }
         viewModel.timerDidChange = { time in
             self.timerLabel.text = "\(time)"
             if time == 0 {
                 self.showAlertTimeIsOver()
-                self.changeAlphaButtons(isActive: false)
             }
         }
     }
     
-    private func fillViewWithData() {
-        title = viewModel.playerName
+    private func prepareForNewWord() {
         currentWordLabel.text = viewModel.currentWord
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
@@ -309,7 +312,6 @@ class CurrentSessionViewController: UIViewController {
 
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             self.viewModel.nextPlayer()
-            self.showHideStartButton(isHidden: false)
         }
 
         alertController.addAction(okAction)

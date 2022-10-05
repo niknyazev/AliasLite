@@ -14,6 +14,7 @@ protocol CurrentSessionViewModelProtocol {
     var wordsGuessedTitle: String { get }
     var viewModelDidChange: (() -> Void)? { get set }
     var timerDidChange: ((Int) -> Void)? { get set } // TODO: make boxing
+    var newRoundPrepare: (() -> Void)? { get set }
     var scoresTitle: String { get }
     var timeTitle: String { get }
     
@@ -26,6 +27,7 @@ protocol CurrentSessionViewModelProtocol {
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
+    var newRoundPrepare: (() -> Void)?
     var timerDidChange: ((Int) -> Void)?
     var timeTitle: String {
         "\(time)"
@@ -67,6 +69,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         currentWord = words.first?.text ?? ""
         gameSettings = storageManager.fetchSettings()
         time = Int(gameSettings?.roundDuration ?? 0)
+        newRoundPrepare?()
     }
     
     // MARK: - Public methods
@@ -153,6 +156,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         
         if time == 0 {
             timer.invalidate()
+            newRoundPrepare?()
         }
         
         timerDidChange?(time)
