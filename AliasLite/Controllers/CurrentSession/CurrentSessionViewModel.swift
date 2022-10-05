@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CloudKit
 
 protocol CurrentSessionViewModelProtocol {
     var playerName: String { get }
@@ -53,6 +54,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     var currentWord: String
     
     private let players: [Player]
+    private var playersScores: [Player: Int] = [:]
     private let words: [Word]
     private var currentPlayerIndex = 0
     private var currentWordIndex = 0
@@ -69,6 +71,11 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
     init() {
         players = storageManager.fetchCurrentGamePlayers()
+        
+        for player in players {
+            playersScores[player] = 0
+        }
+        
         currentPlayer = players.first
         words = storageManager.fetchWords()
         currentWord = words.first?.text ?? ""
@@ -161,7 +168,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         
         if time == 0 {
             timer.invalidate()
-            restoreScores()
+            timerInvalidated()
             playerDidChange?()
             wordDidChange?()
         }
@@ -169,7 +176,13 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         timerDidChange?(time)
     }
     
-    private func restoreScores() {
+    private func timerInvalidated() {
+        
+        if let player = currentPlayer {
+            playersScores[player] =
+                (playersScores[player] ?? 0) + (scores < 0 ? 0 : scores)
+        }
+        
         wordsDropped = 0
         wordsGuessed = 0
     }
