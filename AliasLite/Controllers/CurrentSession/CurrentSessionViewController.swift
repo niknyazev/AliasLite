@@ -110,8 +110,8 @@ class CurrentSessionViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel = CurrentSessionViewModel()
-        viewModel.viewModelDidChange = prepareForNewWord
-        viewModel.newRoundPrepare = {
+        viewModel.wordDidChange = prepareForNewWord
+        viewModel.playerDidChange = {
             self.changeAlphaButtons(isActive: false)
             self.title = self.viewModel.playerName
             self.showHideStartButton(isHidden: false)

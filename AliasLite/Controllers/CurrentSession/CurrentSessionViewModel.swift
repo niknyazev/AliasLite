@@ -12,9 +12,9 @@ protocol CurrentSessionViewModelProtocol {
     var currentWord: String { get }
     var wordsDroppedTitle: String { get }
     var wordsGuessedTitle: String { get }
-    var viewModelDidChange: (() -> Void)? { get set }
+    var wordDidChange: (() -> Void)? { get set }
     var timerDidChange: ((Int) -> Void)? { get set } // TODO: make boxing
-    var newRoundPrepare: (() -> Void)? { get set }
+    var playerDidChange: (() -> Void)? { get set }
     var scoresTitle: String { get }
     var timeTitle: String { get }
     
@@ -27,8 +27,14 @@ protocol CurrentSessionViewModelProtocol {
 
 class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
     
-    var newRoundPrepare: (() -> Void)?
+    // MARK: - Methods for updating view
+    
+    var playerDidChange: (() -> Void)?
     var timerDidChange: ((Int) -> Void)?
+    var wordDidChange: (() -> Void)?
+    
+    // MARK: - Properties
+    
     var timeTitle: String {
         "\(time)"
     }
@@ -45,7 +51,6 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         currentPlayer?.name ?? ""
     }
     var currentWord: String
-    var viewModelDidChange: (() -> Void)?
     
     private let players: [Player]
     private let words: [Word]
@@ -69,7 +74,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         currentWord = words.first?.text ?? ""
         gameSettings = storageManager.fetchSettings()
         time = Int(gameSettings?.roundDuration ?? 0)
-        newRoundPrepare?()
+        playerDidChange?()
     }
     
     // MARK: - Public methods
@@ -96,7 +101,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         
         wordsGuessed += 1
         nextWord()
-        viewModelDidChange?()
+        wordDidChange?()
     }
     
     func wordDropped() {
@@ -113,7 +118,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
 
         wordsDropped += 1
         nextWord()
-        viewModelDidChange?()
+        wordDidChange?()
     }
     
     func nextPlayer() {
@@ -127,7 +132,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         currentPlayer = players[currentPlayerIndex]
         nextWord()
         time = Int(gameSettings?.roundDuration ?? 0)
-        viewModelDidChange?()
+        wordDidChange?()
     }
     
     
@@ -156,7 +161,7 @@ class CurrentSessionViewModel: CurrentSessionViewModelProtocol {
         
         if time == 0 {
             timer.invalidate()
-            newRoundPrepare?()
+            playerDidChange?()
         }
         
         timerDidChange?(time)
