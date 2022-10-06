@@ -111,17 +111,21 @@ class CurrentSessionViewController: UIViewController {
     private func setupViewModel() {
         viewModel = CurrentSessionViewModel()
         viewModel.wordDidChange = prepareForNewWord
-        viewModel.playerDidChange = {
-            self.changeAlphaButtons(isActive: false)
-            self.title = self.viewModel.playerName
-            self.showHideStartButton(isHidden: false)
+        viewModel.playerDidChange = playerDidChange
+        viewModel.timerDidChange = timerDidChange
+    }
+    
+    private func timerDidChange(time: Int) {
+        timerLabel.text = viewModel.timeTitle
+        if time == 0 {
+            showAlertTimeIsOver()
         }
-        viewModel.timerDidChange = { time in
-            self.timerLabel.text = "\(time)"
-            if time == 0 {
-                self.showAlertTimeIsOver()
-            }
-        }
+    }
+    
+    private func playerDidChange() {
+        changeAlphaButtons(isActive: false)
+        title = viewModel.playerName
+        showHideStartButton(isHidden: false)
     }
     
     private func prepareForNewWord() {
@@ -129,7 +133,6 @@ class CurrentSessionViewController: UIViewController {
         droppedLabel.text = viewModel.wordsDroppedTitle
         guessedLabel.text = viewModel.wordsGuessedTitle
         scoreLabel.text = viewModel.scoresTitle
-        timerLabel.text = viewModel.timeTitle
     }
     
     private func setupElements() {
