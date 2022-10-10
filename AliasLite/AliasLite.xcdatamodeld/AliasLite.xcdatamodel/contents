@@ -12,6 +12,7 @@
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Player" inverseName="settings" inverseEntity="Player"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="wins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -25,7 +26,7 @@
     <elements>
         <element name="GameLog" positionX="-54" positionY="27" width="128" height="74"/>
         <element name="GameSettings" positionX="-54" positionY="9" width="128" height="89"/>
-        <element name="Player" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="Word" positionX="-54" positionY="9" width="128" height="59"/>
     </elements>
 </model>

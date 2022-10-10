@@ -11,17 +11,20 @@ protocol PlayerDataViewModelProtocol {
     var name: String { get }
     var score: Int { get }
     var currentGameScores: Int { get }
+    var imageName: String { get }
 }
 
 class PlayerDataViewModel: PlayerDataViewModelProtocol {
     
-    var name: String
+    let name: String
     // TODO: Rename to wins
-    var score: Int
-    var currentGameScores: Int
+    let score: Int
+    let currentGameScores: Int
+    let imageName: String
     
     init(player: Player) {
         name = player.name ?? ""
+        imageName = player.imageName ?? "greyman"
         score = Int(player.wins)
         currentGameScores = Int(player.currentScores)
     }

@@ -84,10 +84,19 @@ class StorageManager {
         
         let player = Player(context: viewContext)
         player.name = name
+        player.imageName = randomImageName()
         
         saveContext()
         
         return player
+    }
+    
+    func randomImageName() -> String {
+        [
+            "greyman",
+            "redman",
+            "girl"
+        ].randomElement() ?? "greyman"
     }
     
     func putToLog(player: Player, word: Word, guessed: Bool) {
