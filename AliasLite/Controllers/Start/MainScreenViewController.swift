@@ -30,7 +30,7 @@ class MainScreenViewController: UIViewController {
         button.setTitle("Continue game", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(startNewGamePressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(continueGamePressed), for: .touchUpInside)
         return button
     }()
         
@@ -115,8 +115,14 @@ class MainScreenViewController: UIViewController {
     }
     
     @objc private func startNewGamePressed() {
+        viewModel.removeOldGameData()
         let gameSettings = GameSettingsViewController()
         navigationController?.pushViewController(gameSettings, animated: true)
+    }
+    
+    @objc private func continueGamePressed() {
+        let gameSession = CurrentSessionViewController()
+        navigationController?.pushViewController(gameSession, animated: true)
     }
 }
 

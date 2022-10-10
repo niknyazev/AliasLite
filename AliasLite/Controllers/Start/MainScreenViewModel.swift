@@ -10,6 +10,8 @@ import Foundation
 protocol MainScreenViewModelProtocol {
     var viewTitle: String { get }
     var numberOfSections: Int { get }
+    
+    func removeOldGameData()
     func getPlayerData(for indexPath: IndexPath) -> PlayerDataViewModelProtocol
     func playersCount(for section: Int) -> Int
     func title(for section: Int) -> String
@@ -17,7 +19,7 @@ protocol MainScreenViewModelProtocol {
 }
 
 class MainScreenViewModel: MainScreenViewModelProtocol {
-    
+
     var numberOfSections: Int {
         currentGamePlayers.isEmpty ? 1 : 2
     }
@@ -36,6 +38,10 @@ class MainScreenViewModel: MainScreenViewModelProtocol {
         }
     }
 
+    func removeOldGameData() {
+        storageManager.removeGameData()
+    }
+    
     func updateData() {
         topPlayers = Array(storageManager.fetchPlayers().prefix(5))
         currentGamePlayers = Array(storageManager.fetchCurrentGamePlayers().prefix(4))
