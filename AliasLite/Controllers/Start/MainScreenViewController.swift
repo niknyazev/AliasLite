@@ -149,7 +149,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         content.secondaryText = indexPath.section == 0
             ? "\(player.score)"
             : "\(player.currentGameScores)"
-        
+        // TODO: remove this array
         let imageName = [
             "greyman",
             "redman",
