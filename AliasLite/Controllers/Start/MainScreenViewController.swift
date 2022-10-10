@@ -149,7 +149,14 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         content.secondaryText = indexPath.section == 0
             ? "\(player.score)"
             : "\(player.currentGameScores)"
-        content.image = UIImage(named: "flat") // TODO: remove this mock
+        
+        let imageName = [
+            "greyman",
+            "redman",
+            "girl"
+        ].randomElement() ?? "greyman"
+        
+        content.image = UIImage(named: imageName) // TODO: remove this mock
         content.imageProperties.maximumSize = CGSize(width: 40, height: 40)
         content.imageProperties.cornerRadius = 20
         cell.contentConfiguration = content
