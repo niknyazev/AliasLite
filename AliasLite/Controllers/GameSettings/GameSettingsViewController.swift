@@ -11,9 +11,20 @@ class GameSettingsViewController: UITableViewController {
     
     let playerCellID = "player"
     let valueCellID = "value"
+    let isEnabled: Bool = false // MOK
     
     private var viewModel: GameSettingsViewModelProtocol!
-        
+    
+//    init(isEnabled: Bool = true) {
+//        // Is It correct, to make init this way
+//        self.isEnabled = isEnabled
+//        super.init()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElements()
@@ -28,12 +39,10 @@ class GameSettingsViewController: UITableViewController {
     }
     
     private func setupElements() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addNewPlayer)
-        )
+            
+        if isEnabled {
+            addNewPlayerButton()
+        }
         
         title = "New game settings"
         view.backgroundColor = .white
@@ -44,6 +53,14 @@ class GameSettingsViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: playerCellID)
         tableView.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.cellId)
         tableView.register(ValueCell.self, forCellReuseIdentifier: valueCellID)
+    }
+    
+    private func addNewPlayerButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewPlayer)
+        )
     }
     
     @objc private func addNewPlayer() {
@@ -133,7 +150,7 @@ class ButtonCell: UITableViewCell {
     private func setupViews() {
         
         backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        
+                
         contentView.addSubview(startLabel)
 
         startLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -173,7 +190,7 @@ extension GameSettingsViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        isEnabled ? 3 : 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -222,6 +239,10 @@ extension GameSettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if !isEnabled {
+            return
+        }
         
         switch indexPath.section {
         case 0:
