@@ -12,7 +12,6 @@
 		0137794B28A1506F00325362 /* WordJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794A28A1506F00325362 /* WordJson.swift */; };
 		0137794D28A2569A00325362 /* WordsReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794C28A2569A00325362 /* WordsReader.swift */; };
 		0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137794E28A3F29F00325362 /* PlayersManager.swift */; };
-		0137795128A3F2E400325362 /* PlayerRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795028A3F2E400325362 /* PlayerRemove.swift */; };
 		0137795528A3FF7B00325362 /* GameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795428A3FF7B00325362 /* GameSettingsViewController.swift */; };
 		0137795728A41A0800325362 /* CurrentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137795628A41A0800325362 /* CurrentSessionViewController.swift */; };
 		0189551528B3D1200043E4F6 /* CurrentSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0189551428B3D1200043E4F6 /* CurrentSessionViewModel.swift */; };
@@ -38,7 +37,6 @@
 		0137794A28A1506F00325362 /* WordJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordJson.swift; sourceTree = "<group>"; };
 		0137794C28A2569A00325362 /* WordsReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReader.swift; sourceTree = "<group>"; };
 		0137794E28A3F29F00325362 /* PlayersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersManager.swift; sourceTree = "<group>"; };
-		0137795028A3F2E400325362 /* PlayerRemove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRemove.swift; sourceTree = "<group>"; };
 		0137795428A3FF7B00325362 /* GameSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewController.swift; sourceTree = "<group>"; };
 		0137795628A41A0800325362 /* CurrentSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSessionViewController.swift; sourceTree = "<group>"; };
 		0189551428B3D1200043E4F6 /* CurrentSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSessionViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				0137794A28A1506F00325362 /* WordJson.swift */,
-				0137795028A3F2E400325362 /* PlayerRemove.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,7 +275,6 @@
 				01E4BA4828C296A500A7F6A9 /* PlayerDataViewModel.swift in Sources */,
 				0137795528A3FF7B00325362 /* GameSettingsViewController.swift in Sources */,
 				0189551528B3D1200043E4F6 /* CurrentSessionViewModel.swift in Sources */,
-				0137795128A3F2E400325362 /* PlayerRemove.swift in Sources */,
 				0137794F28A3F29F00325362 /* PlayersManager.swift in Sources */,
 				01E4BA4628BF63A000A7F6A9 /* StorageManager.swift in Sources */,
 			);

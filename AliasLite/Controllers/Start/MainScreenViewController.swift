@@ -67,13 +67,20 @@ class MainScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.updateData()
         tableTopPlayers.reloadData()
+        setupContinueButton()
     }
     
     // MARK: - Private methods
     
+    private func setupContinueButton() {
+        continueButton.isEnabled = viewModel.numberOfSections == 2
+        continueButton.alpha = continueButton.isEnabled ? 1 : 0.2
+    }
+    
     private func setupElements() {
         title = viewModel.viewTitle
         view.backgroundColor = .white
+        setupContinueButton()
     }
     
     private func addConstraints() {
@@ -88,7 +95,7 @@ class MainScreenViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             startGameButton.heightAnchor.constraint(equalToConstant: 40),
-            startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             startGameButton.widthAnchor.constraint(equalToConstant: 250),
             startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -97,7 +104,7 @@ class MainScreenViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             continueButton.heightAnchor.constraint(equalToConstant: 40),
-            continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -75),
+            continueButton.bottomAnchor.constraint(equalTo: startGameButton.topAnchor, constant: -15),
             continueButton.widthAnchor.constraint(equalToConstant: 250),
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
