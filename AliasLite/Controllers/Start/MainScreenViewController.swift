@@ -128,8 +128,9 @@ class MainScreenViewController: UIViewController {
     }
     
     @objc private func continueGamePressed() {
-        let gameSession = CurrentSessionViewController()
-        navigationController?.pushViewController(gameSession, animated: true)
+        let gameSession = UINavigationController(rootViewController: CurrentSessionViewController())
+        gameSession.modalPresentationStyle = .fullScreen
+        present(gameSession, animated: true)
     }
 }
 
