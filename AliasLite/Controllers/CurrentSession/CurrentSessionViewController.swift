@@ -249,7 +249,7 @@ class CurrentSessionViewController: UIViewController {
         
         let gameSettings = UIAlertAction(title: "Game settings", style: .default) { _ in
             let navigationController = UINavigationController(rootViewController:
-                GameSettingsViewController()
+                GameSettingsViewController(isEnabled: false)
             )
             self.present(navigationController, animated: true)
         }

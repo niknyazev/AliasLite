@@ -11,19 +11,14 @@ class GameSettingsViewController: UITableViewController {
     
     let playerCellID = "player"
     let valueCellID = "value"
-    let isEnabled: Bool = false // MOK
+    private var isEnabled: Bool = true
     
     private var viewModel: GameSettingsViewModelProtocol!
     
-//    init(isEnabled: Bool = true) {
-//        // Is It correct, to make init this way
-//        self.isEnabled = isEnabled
-//        super.init()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    convenience init(isEnabled: Bool = true) {
+        self.init(style: .grouped)
+        self.isEnabled = isEnabled
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
