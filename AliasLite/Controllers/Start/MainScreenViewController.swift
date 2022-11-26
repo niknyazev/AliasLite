@@ -77,6 +77,7 @@ class MainScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.updateData()
         tableTopPlayers.reloadData()
+        labelNoPlayersYet.isHidden = viewModel.numberOfSections == 0
         setupContinueButton()
     }
     
@@ -90,7 +91,6 @@ class MainScreenViewController: UIViewController {
     private func setupElements() {
         title = viewModel.viewTitle
         view.backgroundColor = .white
-        labelNoPlayersYet.isHidden = viewModel.numberOfSections == 0
         setupContinueButton()
     }
     
