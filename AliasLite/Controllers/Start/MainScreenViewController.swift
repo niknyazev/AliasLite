@@ -42,6 +42,16 @@ class MainScreenViewController: UIViewController {
         result.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.cellId)
         return result
     }()
+    
+    private lazy var labelNoPlayersYet: UILabel = {
+        let label = UILabel()
+        label.text = "No games yet"
+        label.font = .systemFont(ofSize: 20)
+        label.textColor = .gray
+        label.isHidden = true
+        return label
+    }()
+    
         
     // MARK: - ViewController life circle
     
@@ -80,6 +90,7 @@ class MainScreenViewController: UIViewController {
     private func setupElements() {
         title = viewModel.viewTitle
         view.backgroundColor = .white
+        labelNoPlayersYet.isHidden = viewModel.numberOfSections == 0
         setupContinueButton()
     }
     
@@ -88,25 +99,29 @@ class MainScreenViewController: UIViewController {
         view.addSubview(startGameButton)
         view.addSubview(continueButton)
         view.addSubview(tableTopPlayers)
+        view.addSubview(labelNoPlayersYet)
         
         // Buttons
         
-        startGameButton.translatesAutoresizingMaskIntoConstraints = false
+        let buttonHeight: CGFloat = 40
+        let buttonWidth: CGFloat = 250
         
-        NSLayoutConstraint.activate([
-            startGameButton.heightAnchor.constraint(equalToConstant: 40),
-            startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            startGameButton.widthAnchor.constraint(equalToConstant: 250),
-            startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            continueButton.heightAnchor.constraint(equalToConstant: 40),
-            continueButton.bottomAnchor.constraint(equalTo: startGameButton.topAnchor, constant: -15),
-            continueButton.widthAnchor.constraint(equalToConstant: 250),
+            continueButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            continueButton.widthAnchor.constraint(equalToConstant: buttonWidth),
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    
+        startGameButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            startGameButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            startGameButton.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -15),
+            startGameButton.widthAnchor.constraint(equalToConstant: buttonWidth),
+            startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // Table view
@@ -117,7 +132,14 @@ class MainScreenViewController: UIViewController {
             tableTopPlayers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableTopPlayers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableTopPlayers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableTopPlayers.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -30)
+            tableTopPlayers.bottomAnchor.constraint(equalTo: startGameButton.topAnchor, constant: -30)
+        ])
+        
+        labelNoPlayersYet.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            labelNoPlayersYet.centerYAnchor.constraint(equalTo: tableTopPlayers.centerYAnchor),
+            labelNoPlayersYet.centerXAnchor.constraint(equalTo: tableTopPlayers.centerXAnchor)
         ])
     }
     
